@@ -1,2 +1,4 @@
-import customtkinter as ctk
+import gui
 
+app = gui.App()
+app.mainloop()
