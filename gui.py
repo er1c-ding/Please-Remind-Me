@@ -61,7 +61,7 @@ class App(ctk.CTk):
             height = 450,
             corner_radius = 10,
             fg_color = FRAME_BACKGROUND,
-            scrollbar_button_color = "#516582"
+            scrollbar_button_color = "#738FBA"
         )
 
         self.reminder_container.pack(pady = (30,0))
