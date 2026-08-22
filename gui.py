@@ -4,15 +4,123 @@ BACKGROUND = "#BDDDFC"
 FRAME_BACKGROUND = "#AED6FE"
 TEXT = "#6A89A7"
 BUTTON = "#88BDF2"
+LITTLE_BUTTON = "#ABD3FA"
 
 class Reminder_Frame(ctk.CTkFrame):
     def __init__(self, master, info, **kwargs):
         super().__init__(master, **kwargs)
 
+        self.configure(
+            width = 480,
+            height = 120,
+            corner_radius = 5,
+            fg_color = "#C5E2FF"
+        )
+
+        self.grid_propagate(False)
+
+        self.grid_columnconfigure((0, 1, 2, 3, 4, 5, 6, 7), weight=1)
+        self.grid_rowconfigure((0, 1, 2), weight=1)
+
+        self.reminder_title = ctk.CTkLabel(
+            self,
+            text = "Reminder Name",
+            text_color = TEXT,
+            font = ("Consolas", 22)
+        )
+
+        self.reminder_title.grid(column = 0, row = 0, columnspan = 5, sticky = "w", padx = 20, pady = (10, 0))
+
+        self.reminder_type = ctk.CTkLabel(
+            self,
+            text = "Reminder Type",
+            text_color = TEXT,
+            font = ("Consolas", 18)
+        )
+
+        self.reminder_type.grid(column = 5, row = 0, columnspan = 3, sticky = "e", padx = 20, pady = (10, 0))
+
+        for i in range(3):
+            self.specific_date = ctk.CTkLabel(
+                self,
+                text = "12/34/5678",
+                text_color = TEXT,
+                font = ("Consolas", 11),
+                corner_radius = 10,
+                height = 20,
+                fg_color = BACKGROUND,
+                padx = 2
+            )
+
+            if i == 0:
+                PADDY = (20, 0)
+            else:
+                PADDY = 0
+
+            self.specific_date.grid(column = i, row = 1, sticky = "w", padx = PADDY)
+
+        self.delete = ctk.CTkButton(
+            self,
+            width = 25,
+            height = 22,
+            text = "X",
+            anchor = "center",
+            fg_color = LITTLE_BUTTON,
+            text_color = TEXT,
+            font = ("Consolas", 16)
+        )
+
+        self.delete.grid(column = 0, row = 2, sticky = "w", padx = (20, 0), pady = 10)
+
+        self.edit = ctk.CTkButton(
+            self,
+            width = 75,
+            height = 22,
+            text = "EDIT",
+            anchor = "center",
+            fg_color = LITTLE_BUTTON,
+            text_color = TEXT,
+            font = ("Consolas", 16)
+        )
+
+        self.edit.grid(column = 0, row = 2, columnspan = 2, pady = 10)
+
+        curr_toggle = ctk.StringVar(value = "off")
+        
+        self.toggle = ctk.CTkSwitch(
+            self,
+            text = "Enable",
+            variable = curr_toggle,
+            onvalue = "on",
+            offvalue = "off",
+            text_color = TEXT,
+            font = ("Consolas", 16),
+            fg_color = "#BE6868",
+            progress_color = "#8EEB71"
+        )
+
+        self.toggle.grid(column = 6, row = 2, columnspan = 2, pady = 10)
+
 
 class Reminder_Container(ctk.CTkScrollableFrame):
      def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+
+        self.configure(
+            width = 500,
+            height = 450,
+            corner_radius = 10,
+            fg_color = FRAME_BACKGROUND,
+            scrollbar_button_color = "#738FBA"
+        )
+
+        for i in range(10):
+            self.reminder = Reminder_Frame(
+                master = self,
+                info = None
+            )
+
+            self.reminder.pack(pady = (10,0))
 
 class App(ctk.CTk):
     def __init__(self):
@@ -61,12 +169,7 @@ class App(ctk.CTk):
         self.create_new.pack(pady = (30,0))
 
         self.reminder_container = Reminder_Container(
-            master = self,
-            width = 500,
-            height = 450,
-            corner_radius = 10,
-            fg_color = FRAME_BACKGROUND,
-            scrollbar_button_color = "#738FBA"
+            master = self
         )
 
         self.reminder_container.pack(pady = (30,0))
