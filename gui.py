@@ -5,6 +5,11 @@ FRAME_BACKGROUND = "#AED6FE"
 TEXT = "#6A89A7"
 BUTTON = "#88BDF2"
 
+class Reminder_Frame(ctk.CTkFrame):
+    def __init__(self, master, info, **kwargs):
+        super().__init__(master, **kwargs)
+
+
 class Reminder_Container(ctk.CTkScrollableFrame):
      def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
