@@ -67,7 +67,8 @@ class Reminder_Frame(ctk.CTkFrame):
             anchor = "center",
             fg_color = LITTLE_BUTTON,
             text_color = TEXT,
-            font = ("Consolas", 16)
+            font = ("Consolas", 16),
+            command = lambda: self.self_destruct()
         )
 
         self.delete.grid(column = 0, row = 2, sticky = "w", padx = (20, 0), pady = 10)
@@ -101,9 +102,12 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.toggle.grid(column = 6, row = 2, columnspan = 2, pady = 10)
 
+    def self_destruct(self):
+        self.destroy()
+
 
 class Reminder_Container(ctk.CTkScrollableFrame):
-     def __init__(self, master, **kwargs):
+    def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -114,13 +118,13 @@ class Reminder_Container(ctk.CTkScrollableFrame):
             scrollbar_button_color = "#738FBA"
         )
 
-        for i in range(10):
-            self.reminder = Reminder_Frame(
-                master = self,
-                info = None
-            )
-
-            self.reminder.pack(pady = (10,0))
+    def create_new_reminder(self):
+        self.reminder = Reminder_Frame(
+            master = self,
+            info = None
+        )
+        
+        self.reminder.pack(pady = (10,0))
 
 class App(ctk.CTk):
     def __init__(self):
@@ -155,6 +159,10 @@ class App(ctk.CTk):
         )
         self.description.pack()
 
+        self.reminder_container = Reminder_Container(
+            master = self
+        )
+
         self.create_new = ctk.CTkButton(
             self,
             width = 300,
@@ -163,13 +171,10 @@ class App(ctk.CTk):
             anchor = "center",
             fg_color = BUTTON,
             text_color = TEXT,
-            font = ("Consolas", 20)
+            font = ("Consolas", 20),
+            command = self.reminder_container.create_new_reminder
         )
 
         self.create_new.pack(pady = (30,0))
-
-        self.reminder_container = Reminder_Container(
-            master = self
-        )
-
+        
         self.reminder_container.pack(pady = (30,0))
