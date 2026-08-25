@@ -5,6 +5,7 @@ FRAME_BACKGROUND = "#AED6FE"
 TEXT = "#6A89A7"
 BUTTON = "#88BDF2"
 LITTLE_BUTTON = "#ABD3FA"
+reminders = []
 
 class Reminder_Frame(ctk.CTkFrame):
     def __init__(self, master, info, **kwargs):
@@ -103,6 +104,7 @@ class Reminder_Frame(ctk.CTkFrame):
         self.toggle.grid(column = 6, row = 2, columnspan = 2, pady = 10)
 
     def self_destruct(self):
+        reminders.remove(self)
         self.destroy()
 
 
@@ -125,6 +127,8 @@ class Reminder_Container(ctk.CTkScrollableFrame):
         )
         
         self.reminder.pack(pady = (10,0))
+
+        reminders.append(self.reminder)
 
 class App(ctk.CTk):
     def __init__(self):
