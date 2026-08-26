@@ -20,8 +20,8 @@ class New_Reminder_Window(ctk.CTkToplevel):
         self.grid_rowconfigure(0, weight=1)
         self.configure(fg_color = BACKGROUND)
 
-        self.curr_option_val = ctk.StringVar(value = "Select Option"
-                                             )
+        self.curr_option_val = ctk.StringVar(value = "Select Option")
+
         self.option_menu = ctk.CTkOptionMenu(
             master = self,
             values = ["Select Option", "Recurring", "Day-to-Day", "One Time", "Podomuro", "20-20-20"],
@@ -36,7 +36,6 @@ class New_Reminder_Window(ctk.CTkToplevel):
         )
 
         self.option_menu.pack(anchor = "w", padx = (20, 0), pady = (20, 0))
-
 
 class Reminder_Frame(ctk.CTkFrame):
     def __init__(self, master, info, **kwargs):
