@@ -87,18 +87,19 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.edit.grid(column = 0, row = 2, columnspan = 2, pady = 10)
 
-        curr_toggle = ctk.StringVar(value = "off")
+        self.curr_toggle = ctk.StringVar(value = "off")
         
         self.toggle = ctk.CTkSwitch(
             self,
             text = "Enable",
-            variable = curr_toggle,
+            variable = self.curr_toggle,
             onvalue = "on",
             offvalue = "off",
             text_color = TEXT,
             font = ("Consolas", 16),
             fg_color = "#BE6868",
-            progress_color = "#8EEB71"
+            progress_color = "#8EEB71",
+            command = self.enable_disable
         )
 
         self.toggle.grid(column = 6, row = 2, columnspan = 2, pady = 10)
@@ -107,6 +108,11 @@ class Reminder_Frame(ctk.CTkFrame):
         reminders.remove(self)
         self.destroy()
 
+    def enable_disable(self):
+        if self.curr_toggle.get() == "off":
+            self.toggle.configure(text = "Enable")
+        else:
+            self.toggle.configure(text = "Disable")
 
 class Reminder_Container(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
