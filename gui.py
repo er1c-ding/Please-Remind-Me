@@ -7,6 +7,37 @@ BUTTON = "#88BDF2"
 LITTLE_BUTTON = "#ABD3FA"
 reminders = []
 
+class New_Reminder_Window(ctk.CTkToplevel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.title("Create New Reminder")
+
+        coord_x = self.winfo_screenwidth() // 2 - 190
+        coord_y = self.winfo_screenheight() // 2 - 300
+        self.geometry(f"580x600+{coord_x}+{coord_y}")
+
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+        self.configure(fg_color = BACKGROUND)
+
+        self.curr_option_val = ctk.StringVar(value = "Select Option"
+                                             )
+        self.option_menu = ctk.CTkOptionMenu(
+            master = self,
+            values = ["Select Option", "Recurring", "Day-to-Day", "One Time", "Podomuro", "20-20-20"],
+            variable = self.curr_option_val,
+            fg_color = BUTTON,
+            button_color = BUTTON,
+            text_color = TEXT,
+            font = ("Consolas", 18),
+            dropdown_font = ("Consolas", 16),
+            dropdown_fg_color = BUTTON,
+            dropdown_text_color = TEXT
+        )
+
+        self.option_menu.pack(anchor = "w", padx = (20, 0), pady = (20, 0))
+
+
 class Reminder_Frame(ctk.CTkFrame):
     def __init__(self, master, info, **kwargs):
         super().__init__(master, **kwargs)
@@ -139,7 +170,6 @@ class Reminder_Container(ctk.CTkScrollableFrame):
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.geometry("800x800")
         self.title("Please Remind Me")
 
         coord_x = self.winfo_screenwidth() // 2 - 200
@@ -188,3 +218,10 @@ class App(ctk.CTk):
         self.create_new.pack(pady = (30,0))
         
         self.reminder_container.pack(pady = (30,0))
+
+        self.new_reminder_window = New_Reminder_Window(self)
+
+        self.new_reminder_window.wm_transient(self) 
+
+        self.new_reminder_window.after(100, self.new_reminder_window.lift)
+        self.new_reminder_window.after(100, self.new_reminder_window.focus)
