@@ -7,6 +7,55 @@ BUTTON = "#88BDF2"
 LITTLE_BUTTON = "#ABD3FA"
 reminders = []
 
+class Creation_Frame(ctk.CTkFrame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+        self.configure(
+            height = 550,
+            width = 500,
+            fg_color = BACKGROUND
+        )
+
+class Recurring_Frame(Creation_Frame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+class Day_To_Day_Frame(Creation_Frame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+class One_Time_Frame(Creation_Frame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+class Default_Frame(Creation_Frame):
+    def __init__(self, master, type, **kwargs):
+        super().__init__(master, **kwargs)
+
+        self.information = ctk.CTkLabel(
+            self,
+            text = f"You have chosen the default: \"{type}\"",
+            text_color = TEXT,
+            font = ("Consolas", 18)
+        )
+
+        self.information.pack(anchor = "w", padx = (20, 0))
+
+        self.save_button = ctk.CTkButton(
+            self,
+            width = 100,
+            height = 40,
+            text = "SAVE",
+            anchor = "center",
+            fg_color = BUTTON,
+            text_color = TEXT,
+            font = ("Consolas", 18),
+        )
+
+        self.save_button.pack(anchor = "w", padx = (20, 0), pady = (30,0))
+
+
 class New_Reminder_Window(ctk.CTkToplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -36,6 +85,12 @@ class New_Reminder_Window(ctk.CTkToplevel):
         )
 
         self.option_menu.pack(anchor = "w", padx = (20, 0), pady = (20, 0))
+
+        self.creation_frame = Creation_Frame(
+            master = self
+        )
+
+        self.creation_frame.pack(anchor = "w", pady = (20, 0))
 
 class Reminder_Frame(ctk.CTkFrame):
     def __init__(self, master, info, **kwargs):
