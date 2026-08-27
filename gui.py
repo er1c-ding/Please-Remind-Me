@@ -139,11 +139,9 @@ class Reminder_Frame(ctk.CTkFrame):
             )
 
             if i == 0:
-                PADDY = (20, 0)
+                self.specific_date.grid(column = i, row = 1, sticky = "w", padx = (20, 0))
             else:
-                PADDY = 0
-
-            self.specific_date.grid(column = i, row = 1, sticky = "w", padx = PADDY)
+                self.specific_date.grid(column = i, row = 1, padx = 0)
 
         self.delete = ctk.CTkButton(
             self,
