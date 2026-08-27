@@ -21,7 +21,7 @@ class Recurring_Frame(Creation_Frame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
-class Day_To_Day_Frame(Creation_Frame):
+class Daily_Frame(Creation_Frame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
@@ -73,7 +73,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
 
         self.option_menu = ctk.CTkOptionMenu(
             master = self,
-            values = ["Select Option", "Recurring", "Day-to-Day", "One Time", "Podomuro", "20-20-20"],
+            values = ["Select Option", "Recurring", "Daily", "One Time", "Podomuro", "20-20-20"],
             variable = self.curr_option_val,
             fg_color = BUTTON,
             button_color = BUTTON,
