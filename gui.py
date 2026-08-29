@@ -21,6 +21,102 @@ class Recurring_Frame(Creation_Frame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
+        self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.grid_columnconfigure(3, weight=15)
+        self.grid_rowconfigure((0, 1, 2, 3), weight=1)
+
+        self.information = ctk.CTkLabel(
+            self,
+            text = "This will repeatedly send a reminder at the interval \nspecified below.",
+            text_color = TEXT,
+            font = ("Consolas", 18),
+            justify = "left"
+        )
+
+        self.information.grid(column = 0, row = 0, columnspan = 4, sticky = "w", padx = (20, 0))
+
+        self.specify_label = ctk.CTkLabel(
+            self,
+            text = "Specify Interval:",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.specify_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
+
+        self.hours = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 50,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "HH",
+            placeholder_text_color = "#6D7B89",
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.hours.grid(column = 0, row = 2, pady = (10, 0), sticky = "w", padx = (20, 0))
+
+        self.colon = ctk.CTkLabel(
+            self,
+            text = ":",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.colon.grid(column = 0, row = 2, sticky = "e", padx = (0, 5), pady = (10, 0))
+
+        self.minutes = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 50,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "MM",
+            placeholder_text_color = "#6D7B89",
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.minutes.grid(column = 1, row = 2, pady = (10, 0), sticky = "w")
+
+        self.colon = ctk.CTkLabel(
+            self,
+            text = ":",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.colon.grid(column = 1, row = 2, sticky = "e", padx = (0, 5), pady = (10, 0))
+
+        self.seconds = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 50,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "SS",
+            placeholder_text_color = "#6D7B89",
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.seconds.grid(column = 2, row = 2, pady = (10, 0), sticky = "w")
+
+        self.save_button = ctk.CTkButton(
+            self,
+            width = 100,
+            height = 40,
+            text = "SAVE",
+            anchor = "center",
+            fg_color = BUTTON,
+            text_color = TEXT,
+            font = ("Consolas", 18),
+        )
+
+        self.save_button.grid(column = 0, row = 3, columnspan = 4, sticky = "w", padx = (20, 0), pady = (30,0))
+
 class Daily_Frame(Creation_Frame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -86,7 +182,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
 
         self.option_menu.pack(anchor = "w", padx = (20, 0), pady = (20, 0))
 
-        self.creation_frame = Creation_Frame(
+        self.creation_frame = Recurring_Frame(
             master = self
         )
 
