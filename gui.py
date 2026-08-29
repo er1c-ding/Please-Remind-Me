@@ -2,9 +2,10 @@ import customtkinter as ctk
 
 BACKGROUND = "#BDDDFC"
 FRAME_BACKGROUND = "#AED6FE"
-TEXT = "#6A89A7"
+TEXT = "#3C5271"
 BUTTON = "#88BDF2"
 LITTLE_BUTTON = "#ABD3FA"
+PLACEHOLDER_TEXT = "#4E5963"
 reminders = []
 
 class Creation_Frame(ctk.CTkFrame):
@@ -22,8 +23,9 @@ class Recurring_Frame(Creation_Frame):
         super().__init__(master, **kwargs)
 
         self.grid_columnconfigure((0, 1, 2), weight=1)
-        self.grid_columnconfigure(3, weight=15)
-        self.grid_rowconfigure((0, 1, 2, 3), weight=1)
+        self.grid_columnconfigure(3, weight=3)
+        self.grid_columnconfigure(4, weight=12)
+        self.grid_rowconfigure((0, 1, 2, 3, 4, 5), weight=1)
 
         self.information = ctk.CTkLabel(
             self,
@@ -33,7 +35,30 @@ class Recurring_Frame(Creation_Frame):
             justify = "left"
         )
 
-        self.information.grid(column = 0, row = 0, columnspan = 4, sticky = "w", padx = (20, 0))
+        self.information.grid(column = 0, row = 0, columnspan = 5, sticky = "w", padx = (20, 0))
+
+        self.title_label = ctk.CTkLabel(
+            self,
+            text = "Title:",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
+
+        self.title_entry = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 450,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "Enter Title Here",
+            placeholder_text_color = PLACEHOLDER_TEXT,
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.title_entry.grid(column = 0, row = 2, columnspan = 5, padx = (20, 0), sticky = "w", pady = (10, 0))
 
         self.specify_label = ctk.CTkLabel(
             self,
@@ -42,7 +67,7 @@ class Recurring_Frame(Creation_Frame):
             font = ("Consolas", 18),            
         )
         
-        self.specify_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
+        self.specify_label.grid(column = 0, row = 3, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
 
         self.hours = ctk.CTkEntry(
             self,
@@ -51,12 +76,12 @@ class Recurring_Frame(Creation_Frame):
             fg_color = "#D2E6FB",
             text_color = TEXT,
             placeholder_text = "HH",
-            placeholder_text_color = "#6D7B89",
+            placeholder_text_color = PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
 
-        self.hours.grid(column = 0, row = 2, pady = (10, 0), sticky = "w", padx = (20, 0))
+        self.hours.grid(column = 0, row = 4, pady = (10, 0), sticky = "w", padx = (20, 0))
 
         self.colon = ctk.CTkLabel(
             self,
@@ -65,7 +90,7 @@ class Recurring_Frame(Creation_Frame):
             font = ("Consolas", 18),            
         )
         
-        self.colon.grid(column = 0, row = 2, sticky = "e", padx = (0, 5), pady = (10, 0))
+        self.colon.grid(column = 0, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
         self.minutes = ctk.CTkEntry(
             self,
@@ -74,12 +99,12 @@ class Recurring_Frame(Creation_Frame):
             fg_color = "#D2E6FB",
             text_color = TEXT,
             placeholder_text = "MM",
-            placeholder_text_color = "#6D7B89",
+            placeholder_text_color = PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
 
-        self.minutes.grid(column = 1, row = 2, pady = (10, 0), sticky = "w")
+        self.minutes.grid(column = 1, row = 4, pady = (10, 0), sticky = "w")
 
         self.colon = ctk.CTkLabel(
             self,
@@ -88,7 +113,7 @@ class Recurring_Frame(Creation_Frame):
             font = ("Consolas", 18),            
         )
         
-        self.colon.grid(column = 1, row = 2, sticky = "e", padx = (0, 5), pady = (10, 0))
+        self.colon.grid(column = 1, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
         self.seconds = ctk.CTkEntry(
             self,
@@ -97,12 +122,12 @@ class Recurring_Frame(Creation_Frame):
             fg_color = "#D2E6FB",
             text_color = TEXT,
             placeholder_text = "SS",
-            placeholder_text_color = "#6D7B89",
+            placeholder_text_color = PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
 
-        self.seconds.grid(column = 2, row = 2, pady = (10, 0), sticky = "w")
+        self.seconds.grid(column = 2, row = 4, pady = (10, 0), sticky = "w")
 
         self.save_button = ctk.CTkButton(
             self,
@@ -115,7 +140,7 @@ class Recurring_Frame(Creation_Frame):
             font = ("Consolas", 18),
         )
 
-        self.save_button.grid(column = 0, row = 3, columnspan = 4, sticky = "w", padx = (20, 0), pady = (30,0))
+        self.save_button.grid(column = 0, row = 5, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
 
 class Daily_Frame(Creation_Frame):
     def __init__(self, master, **kwargs):
@@ -272,7 +297,7 @@ class Reminder_Frame(ctk.CTkFrame):
         
         self.toggle = ctk.CTkSwitch(
             self,
-            text = "Enable",
+            text = "Disabled",
             variable = self.curr_toggle,
             onvalue = "on",
             offvalue = "off",
@@ -283,7 +308,7 @@ class Reminder_Frame(ctk.CTkFrame):
             command = self.enable_disable
         )
 
-        self.toggle.grid(column = 6, row = 2, columnspan = 2, pady = 10)
+        self.toggle.grid(column = 6, row = 2, columnspan = 2, pady = 10, padx = 20)
 
     def self_destruct(self):
         reminders.remove(self)
@@ -291,9 +316,9 @@ class Reminder_Frame(ctk.CTkFrame):
 
     def enable_disable(self):
         if self.curr_toggle.get() == "off":
-            self.toggle.configure(text = "Enable")
+            self.toggle.configure(text = "Disabled")
         else:
-            self.toggle.configure(text = "Disable")
+            self.toggle.configure(text = "Enabled")
 
 class Reminder_Container(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
