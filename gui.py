@@ -150,6 +150,195 @@ class One_Time_Frame(Creation_Frame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
+        self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.grid_columnconfigure(3, weight=3)
+        self.grid_columnconfigure(4, weight=12)
+        self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7), weight=1)
+
+        self.information = ctk.CTkLabel(
+            self,
+            text = "This will send a single reminder at the time and date \nspecified below.",
+            text_color = TEXT,
+            font = ("Consolas", 18),
+            justify = "left"
+        )
+
+        self.information.grid(column = 0, row = 0, columnspan = 5, sticky = "w", padx = (20, 0))
+
+        self.title_label = ctk.CTkLabel(
+            self,
+            text = "Title:",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
+
+        self.title_entry = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 450,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "Enter Title Here",
+            placeholder_text_color = PLACEHOLDER_TEXT,
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.title_entry.grid(column = 0, row = 2, columnspan = 5, padx = (20, 0), sticky = "w", pady = (10, 0))
+
+        self.specify_label = ctk.CTkLabel(
+            self,
+            text = "Specify Time:",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.specify_label.grid(column = 0, row = 3, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
+
+        self.hours = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 50,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "HH",
+            placeholder_text_color = PLACEHOLDER_TEXT,
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.hours.grid(column = 0, row = 4, pady = (10, 0), sticky = "w", padx = (20, 0))
+
+        self.colon = ctk.CTkLabel(
+            self,
+            text = ":",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.colon.grid(column = 0, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
+
+        self.minutes = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 50,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "MM",
+            placeholder_text_color = PLACEHOLDER_TEXT,
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.minutes.grid(column = 1, row = 4, pady = (10, 0), sticky = "w")
+
+        self.colon = ctk.CTkLabel(
+            self,
+            text = ":",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.colon.grid(column = 1, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
+
+        self.seconds = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 50,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "SS",
+            placeholder_text_color = PLACEHOLDER_TEXT,
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.seconds.grid(column = 2, row = 4, pady = (10, 0), sticky = "w")
+
+        self.specify_label = ctk.CTkLabel(
+            self,
+            text = "Specify Date:",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.specify_label.grid(column = 0, row = 5, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
+
+        self.day = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 50,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "DD",
+            placeholder_text_color = PLACEHOLDER_TEXT,
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.day.grid(column = 0, row = 6, pady = (10, 0), sticky = "w", padx = (20, 0))
+
+        self.slash = ctk.CTkLabel(
+            self,
+            text = "/",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.slash.grid(column = 0, row = 6, sticky = "e", padx = (0, 5), pady = (10, 0))
+
+        self.month = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 50,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "MM",
+            placeholder_text_color = PLACEHOLDER_TEXT,
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.month.grid(column = 1, row = 6, pady = (10, 0), sticky = "w")
+
+        self.slash = ctk.CTkLabel(
+            self,
+            text = "/",
+            text_color = TEXT,
+            font = ("Consolas", 18),            
+        )
+        
+        self.slash.grid(column = 1, row = 6, sticky = "e", padx = (0, 5), pady = (10, 0))
+
+        self.year = ctk.CTkEntry(
+            self,
+            font = ("Consolas", 18),
+            width = 75,
+            fg_color = "#D2E6FB",
+            text_color = TEXT,
+            placeholder_text = "YYYY",
+            placeholder_text_color = PLACEHOLDER_TEXT,
+            border_width = 0,
+            justify = "center"
+        )
+
+        self.year.grid(column = 2, row = 6, pady = (10, 0), sticky = "w")
+
+        self.save_button = ctk.CTkButton(
+            self,
+            width = 100,
+            height = 40,
+            text = "SAVE",
+            anchor = "center",
+            fg_color = BUTTON,
+            text_color = TEXT,
+            font = ("Consolas", 18),
+        )
+
+        self.save_button.grid(column = 0, row = 7, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
+
 class Default_Frame(Creation_Frame):
     def __init__(self, master, type, **kwargs):
         super().__init__(master, **kwargs)
@@ -207,7 +396,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
 
         self.option_menu.pack(anchor = "w", padx = (20, 0), pady = (20, 0))
 
-        self.creation_frame = Recurring_Frame(
+        self.creation_frame = One_Time_Frame(
             master = self
         )
 
@@ -398,5 +587,5 @@ class App(ctk.CTk):
 
         self.new_reminder_window.wm_transient(self) 
 
-        self.new_reminder_window.after(100, self.new_reminder_window.lift)
-        self.new_reminder_window.after(100, self.new_reminder_window.focus)
+        self.new_reminder_window.after(200, self.new_reminder_window.lift)
+        self.new_reminder_window.after(200, self.new_reminder_window.focus)
