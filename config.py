@@ -68,3 +68,12 @@ class Default_Save_Button(Default_Button):
             width = 100,
             text = "SAVE"
         )
+
+class Default_Title_Entry(Default_Entry):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+        self.configure(
+            width = 450,
+            placeholder_text = "Enter Title Here"
+        )

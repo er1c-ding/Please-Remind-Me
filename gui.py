@@ -32,7 +32,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
 
         self.option_menu.pack(anchor = "w", padx = (20, 0), pady = (20, 0))
 
-        self.creation_frame = frames.One_Time_Frame(
+        self.creation_frame = frames.Daily_Frame(
             master = self
         )
 

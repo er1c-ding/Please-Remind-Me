@@ -35,10 +35,8 @@ class Recurring_Frame(Creation_Frame):
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
-        self.title_entry = config.Default_Entry(
-            self,
-            width = 450,
-            placeholder_text = "Enter Title Here"
+        self.title_entry = config.Default_Title_Entry(
+            self
         )
 
         self.title_entry.grid(column = 0, row = 2, columnspan = 5, padx = (20, 0), sticky = "w", pady = (10, 0))
@@ -122,10 +120,8 @@ class One_Time_Frame(Creation_Frame):
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
-        self.title_entry = config.Default_Entry(
-            self,
-            width = 450,
-            placeholder_text = "Enter Title Here"
+        self.title_entry = config.Default_Title_Entry(
+            self
         )
 
         self.title_entry.grid(column = 0, row = 2, columnspan = 5, padx = (20, 0), sticky = "w", pady = (10, 0))
