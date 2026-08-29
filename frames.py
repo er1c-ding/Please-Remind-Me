@@ -87,7 +87,8 @@ class Recurring_Frame(Creation_Frame):
         self.seconds.grid(column = 2, row = 4, pady = (10, 0), sticky = "w")
 
         self.save_button = config.Default_Save_Button(
-            self
+            self,
+            command = master.save
         )
 
         self.save_button.grid(column = 0, row = 5, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
@@ -204,7 +205,8 @@ class Daily_Frame(Creation_Frame):
         self.checkbox_frame.grid(column = 0, row = 6, columnspan = 4, sticky = "w")
 
         self.save_button = config.Default_Save_Button(
-            self
+            self,
+            command = master.save
         )
 
         self.save_button.grid(column = 0, row = 7, columnspan = 4, sticky = "w", padx = (20, 0), pady = (30,0))
@@ -330,7 +332,8 @@ class One_Time_Frame(Creation_Frame):
         self.year.grid(column = 2, row = 6, pady = (10, 0), sticky = "w")
 
         self.save_button = config.Default_Save_Button(
-            self
+            self,
+            command = master.save
         )
 
         self.save_button.grid(column = 0, row = 7, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
@@ -347,7 +350,8 @@ class Default_Frame(Creation_Frame):
         self.information.pack(anchor = "w", padx = (20, 0))
 
         self.save_button = config.Default_Save_Button(
-            self
+            self,
+            command = master.save
         )
 
         self.save_button.pack(anchor = "w", padx = (20, 0), pady = (30,0))

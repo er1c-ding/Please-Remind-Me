@@ -11,6 +11,8 @@ class New_Reminder_Window(ctk.CTkToplevel):
         coord_y = self.winfo_screenheight() // 2 - 300
         self.geometry(f"580x600+{coord_x}+{coord_y}")
 
+        self.protocol("WM_DELETE_WINDOW", self.destroy)
+
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
         self.configure(fg_color = config.BACKGROUND)
@@ -56,6 +58,10 @@ class New_Reminder_Window(ctk.CTkToplevel):
             self.creation_frame = frames.Default_Frame(master = self, type = "20-20-20")
 
         self.creation_frame.pack(anchor = "w", pady = (20, 0))
+
+    def save(self):
+        self.master.reminder_container.create_frame()
+        self.destroy()
 
 class Reminder_Frame(ctk.CTkFrame):
     def __init__(self, master, info, **kwargs):
@@ -166,7 +172,7 @@ class Reminder_Container(ctk.CTkScrollableFrame):
             scrollbar_button_color = "#738FBA"
         )
 
-    def create_new_reminder(self):
+    def create_frame(self):
         self.reminder = Reminder_Frame(
             master = self,
             info = None
@@ -215,16 +221,17 @@ class App(ctk.CTk):
             width = 300,
             height = 50,
             text = "CREATE NEW REMINDER",
-            command = self.reminder_container.create_new_reminder
+            command = self.create_new_reminder
         )
 
         self.create_new.pack(pady = (30,0))
         
         self.reminder_container.pack(pady = (30,0))
 
+        self.new_reminder_window = None
+
+    def create_new_reminder(self):
         self.new_reminder_window = New_Reminder_Window(self)
-
         self.new_reminder_window.wm_transient(self) 
-
-        self.new_reminder_window.after(200, self.new_reminder_window.lift)
-        self.new_reminder_window.after(200, self.new_reminder_window.focus)
+        self.new_reminder_window.lift()
+        self.new_reminder_window.focus()
