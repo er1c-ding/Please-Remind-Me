@@ -27,14 +27,33 @@ class New_Reminder_Window(ctk.CTkToplevel):
             font = config.BODY_FONT,
             dropdown_font = config.SMALL_FONT,
             dropdown_fg_color = config.BUTTON,
-            dropdown_text_color = config.TEXT
+            dropdown_text_color = config.TEXT,
+            command = self.switch_frame
         )
 
         self.option_menu.pack(anchor = "w", padx = (20, 0), pady = (20, 0))
 
-        self.creation_frame = frames.Daily_Frame(
+        self.creation_frame = frames.Creation_Frame(
             master = self
         )
+
+        self.creation_frame.pack(anchor = "w", pady = (20, 0))
+
+    def switch_frame(self, value):
+        self.creation_frame.destroy()
+
+        if value == "Select Option":
+            self.creation_frame = frames.Creation_Frame(master = self)
+        elif value == "Recurring":
+            self.creation_frame = frames.Recurring_Frame(master = self)
+        elif value == "Daily":
+            self.creation_frame = frames.Daily_Frame(master = self)
+        elif value == "One Time":
+            self.creation_frame = frames.One_Time_Frame(master = self)
+        elif value == "Podomuro":
+            self.creation_frame = frames.Default_Frame(master = self, type = "Podomuro")
+        else:
+            self.creation_frame = frames.Default_Frame(master = self, type = "20-20-20")
 
         self.creation_frame.pack(anchor = "w", pady = (20, 0))
 
