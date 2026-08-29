@@ -63,11 +63,9 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.reminder_title.grid(column = 0, row = 0, columnspan = 5, sticky = "w", padx = 20, pady = (10, 0))
 
-        self.reminder_type = ctk.CTkLabel(
+        self.reminder_type = config.Default_Label(
             self,
-            text = "Reminder Type",
-            text_color = config.TEXT,
-            font = config.BODY_FONT
+            text = "Reminder Type"
         )
 
         self.reminder_type.grid(column = 5, row = 0, columnspan = 3, sticky = "e", padx = 20, pady = (10, 0))
@@ -91,29 +89,21 @@ class Reminder_Frame(ctk.CTkFrame):
             else:
                 self.specific_date.grid(column = i, row = 1, padx = 0)
 
-        self.delete = ctk.CTkButton(
+        self.delete = config.Default_Little_Button(
             self,
             width = 25,
             height = 22,
             text = "X",
-            anchor = "center",
-            fg_color = config.LITTLE_BUTTON,
-            text_color = config.TEXT,
-            font = config.BODY_FONT,
             command = lambda: self.self_destruct()
         )
 
         self.delete.grid(column = 0, row = 2, sticky = "w", padx = (20, 0), pady = 10)
 
-        self.edit = ctk.CTkButton(
+        self.edit = config.Default_Little_Button(
             self,
             width = 75,
             height = 22,
-            text = "EDIT",
-            anchor = "center",
-            fg_color = config.LITTLE_BUTTON,
-            text_color = config.TEXT,
-            font = config.BODY_FONT
+            text = "EDIT"
         )
 
         self.edit.grid(column = 0, row = 2, columnspan = 2, pady = 10)
@@ -190,12 +180,10 @@ class App(ctk.CTk):
 
         self.title_text.pack(pady = (50,20))
 
-        self.description = ctk.CTkLabel(
+        self.description = config.Default_Label(
             self,
             text = "The one stop convenient reminder app to prevent you \n from forgetting things",
-            justify = "center",
-            text_color = config.TEXT,
-            font = config.BODY_FONT
+            justify = "center"
         )
         self.description.pack()
 
@@ -203,15 +191,11 @@ class App(ctk.CTk):
             master = self
         )
 
-        self.create_new = ctk.CTkButton(
+        self.create_new = config.Default_Button(
             self,
             width = 300,
             height = 50,
             text = "CREATE NEW REMINDER",
-            anchor = "center",
-            fg_color = config.BUTTON,
-            text_color = config.TEXT,
-            font = config.BUTTON_FONT,
             command = self.reminder_container.create_new_reminder
         )
 

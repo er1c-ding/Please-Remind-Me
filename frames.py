@@ -20,117 +20,76 @@ class Recurring_Frame(Creation_Frame):
         self.grid_columnconfigure(4, weight=12)
         self.grid_rowconfigure((0, 1, 2, 3, 4, 5), weight=1)
 
-        self.information = ctk.CTkLabel(
+        self.information = config.Default_Label(
             self,
             text = "This will repeatedly send a reminder at the interval \nspecified below.",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,
             justify = "left"
         )
 
         self.information.grid(column = 0, row = 0, columnspan = 5, sticky = "w", padx = (20, 0))
 
-        self.title_label = ctk.CTkLabel(
+        self.title_label = config.Default_Label(
             self,
-            text = "Title:",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = "Title:"          
         )
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
-        self.title_entry = ctk.CTkEntry(
+        self.title_entry = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 450,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "Enter Title Here",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "Enter Title Here"
         )
 
         self.title_entry.grid(column = 0, row = 2, columnspan = 5, padx = (20, 0), sticky = "w", pady = (10, 0))
 
-        self.specify_label = ctk.CTkLabel(
+        self.specify_label = config.Default_Label(
             self,
-            text = "Specify Interval:",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = "Specify Interval:"           
         )
         
         self.specify_label.grid(column = 0, row = 3, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
 
-        self.hours = ctk.CTkEntry(
+        self.hours = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 50,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "HH",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "HH"
         )
 
         self.hours.grid(column = 0, row = 4, pady = (10, 0), sticky = "w", padx = (20, 0))
 
-        self.colon = ctk.CTkLabel(
+        self.colon = config.Default_Label(
             self,
-            text = ":",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = ":"          
         )
         
         self.colon.grid(column = 0, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
-        self.minutes = ctk.CTkEntry(
+        self.minutes = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 50,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "MM",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "MM"
         )
 
         self.minutes.grid(column = 1, row = 4, pady = (10, 0), sticky = "w")
 
-        self.colon = ctk.CTkLabel(
+        self.colon = config.Default_Label(
             self,
-            text = ":",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = ":"          
         )
         
         self.colon.grid(column = 1, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
-        self.seconds = ctk.CTkEntry(
+        self.seconds = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 50,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "SS",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "SS"
         )
 
         self.seconds.grid(column = 2, row = 4, pady = (10, 0), sticky = "w")
 
-        self.save_button = ctk.CTkButton(
-            self,
-            width = 100,
-            height = 40,
-            text = "SAVE",
-            anchor = "center",
-            fg_color = config.BUTTON,
-            text_color = config.TEXT,
-            font = config.BUTTON_FONT,
+        self.save_button = config.Default_Save_Button(
+            self
         )
 
         self.save_button.grid(column = 0, row = 5, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
@@ -148,186 +107,121 @@ class One_Time_Frame(Creation_Frame):
         self.grid_columnconfigure(4, weight=12)
         self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7), weight=1)
 
-        self.information = ctk.CTkLabel(
+        self.information = config.Default_Label(
             self,
             text = "This will send a single reminder at the time and date \nspecified below.",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,
             justify = "left"
         )
 
         self.information.grid(column = 0, row = 0, columnspan = 5, sticky = "w", padx = (20, 0))
 
-        self.title_label = ctk.CTkLabel(
+        self.title_label = config.Default_Label(
             self,
-            text = "Title:",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = "Title:"            
         )
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
-        self.title_entry = ctk.CTkEntry(
+        self.title_entry = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 450,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "Enter Title Here",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "Enter Title Here"
         )
 
         self.title_entry.grid(column = 0, row = 2, columnspan = 5, padx = (20, 0), sticky = "w", pady = (10, 0))
 
-        self.specify_label = ctk.CTkLabel(
+        self.specify_label = config.Default_Label(
             self,
-            text = "Specify Time:",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = "Specify Time:"
         )
         
         self.specify_label.grid(column = 0, row = 3, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
 
-        self.hours = ctk.CTkEntry(
+        self.hours = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 50,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "HH",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "HH"
         )
 
         self.hours.grid(column = 0, row = 4, pady = (10, 0), sticky = "w", padx = (20, 0))
 
-        self.colon = ctk.CTkLabel(
+        self.colon = config.Default_Label(
             self,
-            text = ":",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = ":"
         )
         
         self.colon.grid(column = 0, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
-        self.minutes = ctk.CTkEntry(
+        self.minutes = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 50,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "MM",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "MM"
         )
 
         self.minutes.grid(column = 1, row = 4, pady = (10, 0), sticky = "w")
 
-        self.colon = ctk.CTkLabel(
+        self.colon = config.Default_Label(
             self,
-            text = ":",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = ":"
         )
         
         self.colon.grid(column = 1, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
-        self.seconds = ctk.CTkEntry(
+        self.seconds = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 50,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "SS",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "SS"
         )
 
         self.seconds.grid(column = 2, row = 4, pady = (10, 0), sticky = "w")
 
-        self.specify_label = ctk.CTkLabel(
+        self.specify_label = config.Default_Label(
             self,
-            text = "Specify Date:",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = "Specify Date:"
         )
         
         self.specify_label.grid(column = 0, row = 5, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
 
-        self.day = ctk.CTkEntry(
+        self.day = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 50,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "DD",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "DD"
         )
 
         self.day.grid(column = 0, row = 6, pady = (10, 0), sticky = "w", padx = (20, 0))
 
-        self.slash = ctk.CTkLabel(
+        self.slash = config.Default_Label(
             self,
-            text = "/",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = "/"
         )
         
         self.slash.grid(column = 0, row = 6, sticky = "e", padx = (0, 5), pady = (10, 0))
 
-        self.month = ctk.CTkEntry(
+        self.month = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 50,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "MM",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "MM"
         )
 
         self.month.grid(column = 1, row = 6, pady = (10, 0), sticky = "w")
 
-        self.slash = ctk.CTkLabel(
+        self.slash = config.Default_Label(
             self,
-            text = "/",
-            text_color = config.TEXT,
-            font = config.BODY_FONT,            
+            text = "/"
         )
         
         self.slash.grid(column = 1, row = 6, sticky = "e", padx = (0, 5), pady = (10, 0))
 
-        self.year = ctk.CTkEntry(
+        self.year = config.Default_Entry(
             self,
-            font = config.BODY_FONT,
             width = 75,
-            fg_color = config.ENTRY_BACKGROUND,
-            text_color = config.TEXT,
-            placeholder_text = "YYYY",
-            placeholder_text_color = config.PLACEHOLDER_TEXT,
-            border_width = 0,
-            justify = "center"
+            placeholder_text = "YYYY"
         )
 
         self.year.grid(column = 2, row = 6, pady = (10, 0), sticky = "w")
 
-        self.save_button = ctk.CTkButton(
-            self,
-            width = 100,
-            height = 40,
-            text = "SAVE",
-            anchor = "center",
-            fg_color = config.BUTTON,
-            text_color = config.TEXT,
-            font = config.BODY_FONT,
+        self.save_button = config.Default_Save_Button(
+            self
         )
 
         self.save_button.grid(column = 0, row = 7, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
@@ -336,24 +230,15 @@ class Default_Frame(Creation_Frame):
     def __init__(self, master, type, **kwargs):
         super().__init__(master, **kwargs)
 
-        self.information = ctk.CTkLabel(
+        self.information = config.Default_Label(
             self,
-            text = f"You have chosen the default: \"{type}\"",
-            text_color = config.TEXT,
-            font = config.BODY_FONT
+            text = f"You have chosen the default: \"{type}\""
         )
 
         self.information.pack(anchor = "w", padx = (20, 0))
 
-        self.save_button = ctk.CTkButton(
-            self,
-            width = 100,
-            height = 40,
-            text = "SAVE",
-            anchor = "center",
-            fg_color = config.BUTTON,
-            text_color = config.TEXT,
-            font = config.BODY_FONT,
+        self.save_button = config.Default_Save_Button(
+            self
         )
 
         self.save_button.pack(anchor = "w", padx = (20, 0), pady = (30,0))
