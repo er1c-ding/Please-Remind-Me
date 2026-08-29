@@ -1,12 +1,5 @@
 import customtkinter as ctk
-
-BACKGROUND = "#BDDDFC"
-FRAME_BACKGROUND = "#AED6FE"
-TEXT = "#3C5271"
-BUTTON = "#88BDF2"
-LITTLE_BUTTON = "#ABD3FA"
-PLACEHOLDER_TEXT = "#4E5963"
-reminders = []
+import config
 
 class Creation_Frame(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
@@ -15,7 +8,7 @@ class Creation_Frame(ctk.CTkFrame):
         self.configure(
             height = 550,
             width = 500,
-            fg_color = BACKGROUND
+            fg_color = config.BACKGROUND
         )
 
 class Recurring_Frame(Creation_Frame):
@@ -30,7 +23,7 @@ class Recurring_Frame(Creation_Frame):
         self.information = ctk.CTkLabel(
             self,
             text = "This will repeatedly send a reminder at the interval \nspecified below.",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),
             justify = "left"
         )
@@ -40,7 +33,7 @@ class Recurring_Frame(Creation_Frame):
         self.title_label = ctk.CTkLabel(
             self,
             text = "Title:",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -50,10 +43,10 @@ class Recurring_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 450,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "Enter Title Here",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -63,7 +56,7 @@ class Recurring_Frame(Creation_Frame):
         self.specify_label = ctk.CTkLabel(
             self,
             text = "Specify Interval:",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -73,10 +66,10 @@ class Recurring_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 50,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "HH",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -86,7 +79,7 @@ class Recurring_Frame(Creation_Frame):
         self.colon = ctk.CTkLabel(
             self,
             text = ":",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -96,10 +89,10 @@ class Recurring_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 50,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "MM",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -109,7 +102,7 @@ class Recurring_Frame(Creation_Frame):
         self.colon = ctk.CTkLabel(
             self,
             text = ":",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -119,10 +112,10 @@ class Recurring_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 50,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "SS",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -135,8 +128,8 @@ class Recurring_Frame(Creation_Frame):
             height = 40,
             text = "SAVE",
             anchor = "center",
-            fg_color = BUTTON,
-            text_color = TEXT,
+            fg_color = config.BUTTON,
+            text_color = config.TEXT,
             font = ("Consolas", 18),
         )
 
@@ -158,7 +151,7 @@ class One_Time_Frame(Creation_Frame):
         self.information = ctk.CTkLabel(
             self,
             text = "This will send a single reminder at the time and date \nspecified below.",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),
             justify = "left"
         )
@@ -168,7 +161,7 @@ class One_Time_Frame(Creation_Frame):
         self.title_label = ctk.CTkLabel(
             self,
             text = "Title:",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -178,10 +171,10 @@ class One_Time_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 450,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "Enter Title Here",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -191,7 +184,7 @@ class One_Time_Frame(Creation_Frame):
         self.specify_label = ctk.CTkLabel(
             self,
             text = "Specify Time:",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -201,10 +194,10 @@ class One_Time_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 50,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "HH",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -214,7 +207,7 @@ class One_Time_Frame(Creation_Frame):
         self.colon = ctk.CTkLabel(
             self,
             text = ":",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -224,10 +217,10 @@ class One_Time_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 50,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "MM",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -237,7 +230,7 @@ class One_Time_Frame(Creation_Frame):
         self.colon = ctk.CTkLabel(
             self,
             text = ":",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -247,10 +240,10 @@ class One_Time_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 50,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "SS",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -260,7 +253,7 @@ class One_Time_Frame(Creation_Frame):
         self.specify_label = ctk.CTkLabel(
             self,
             text = "Specify Date:",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -270,10 +263,10 @@ class One_Time_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 50,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "DD",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -283,7 +276,7 @@ class One_Time_Frame(Creation_Frame):
         self.slash = ctk.CTkLabel(
             self,
             text = "/",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -293,10 +286,10 @@ class One_Time_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 50,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "MM",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -306,7 +299,7 @@ class One_Time_Frame(Creation_Frame):
         self.slash = ctk.CTkLabel(
             self,
             text = "/",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18),            
         )
         
@@ -316,10 +309,10 @@ class One_Time_Frame(Creation_Frame):
             self,
             font = ("Consolas", 18),
             width = 75,
-            fg_color = "#D2E6FB",
-            text_color = TEXT,
+            fg_color = config.ENTRY_BACKGROUND,
+            text_color = config.TEXT,
             placeholder_text = "YYYY",
-            placeholder_text_color = PLACEHOLDER_TEXT,
+            placeholder_text_color = config.PLACEHOLDER_TEXT,
             border_width = 0,
             justify = "center"
         )
@@ -332,8 +325,8 @@ class One_Time_Frame(Creation_Frame):
             height = 40,
             text = "SAVE",
             anchor = "center",
-            fg_color = BUTTON,
-            text_color = TEXT,
+            fg_color = config.BUTTON,
+            text_color = config.TEXT,
             font = ("Consolas", 18),
         )
 
@@ -346,7 +339,7 @@ class Default_Frame(Creation_Frame):
         self.information = ctk.CTkLabel(
             self,
             text = f"You have chosen the default: \"{type}\"",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18)
         )
 
@@ -358,8 +351,8 @@ class Default_Frame(Creation_Frame):
             height = 40,
             text = "SAVE",
             anchor = "center",
-            fg_color = BUTTON,
-            text_color = TEXT,
+            fg_color = config.BUTTON,
+            text_color = config.TEXT,
             font = ("Consolas", 18),
         )
 
@@ -377,7 +370,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
 
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
-        self.configure(fg_color = BACKGROUND)
+        self.configure(fg_color = config.BACKGROUND)
 
         self.curr_option_val = ctk.StringVar(value = "Select Option")
 
@@ -385,13 +378,13 @@ class New_Reminder_Window(ctk.CTkToplevel):
             master = self,
             values = ["Select Option", "Recurring", "Daily", "One Time", "Podomuro", "20-20-20"],
             variable = self.curr_option_val,
-            fg_color = BUTTON,
-            button_color = BUTTON,
-            text_color = TEXT,
+            fg_color = config.BUTTON,
+            button_color = config.BUTTON,
+            text_color = config.TEXT,
             font = ("Consolas", 18),
             dropdown_font = ("Consolas", 16),
-            dropdown_fg_color = BUTTON,
-            dropdown_text_color = TEXT
+            dropdown_fg_color = config.BUTTON,
+            dropdown_text_color = config.TEXT
         )
 
         self.option_menu.pack(anchor = "w", padx = (20, 0), pady = (20, 0))
@@ -421,7 +414,7 @@ class Reminder_Frame(ctk.CTkFrame):
         self.reminder_title = ctk.CTkLabel(
             self,
             text = "Reminder Name",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 22)
         )
 
@@ -430,7 +423,7 @@ class Reminder_Frame(ctk.CTkFrame):
         self.reminder_type = ctk.CTkLabel(
             self,
             text = "Reminder Type",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18)
         )
 
@@ -440,13 +433,13 @@ class Reminder_Frame(ctk.CTkFrame):
             self.specific_date = ctk.CTkLabel(
                 self,
                 text = "12/34/5678",
-                text_color = TEXT,
+                text_color = config.TEXT,
                 font = ("Consolas", 11),
                 corner_radius = 10,
                 anchor = "center",
                 height = 20,
                 width = 80,
-                fg_color = BACKGROUND,
+                fg_color = config.BACKGROUND,
                 padx = 2
             )
 
@@ -461,8 +454,8 @@ class Reminder_Frame(ctk.CTkFrame):
             height = 22,
             text = "X",
             anchor = "center",
-            fg_color = LITTLE_BUTTON,
-            text_color = TEXT,
+            fg_color = config.LITTLE_BUTTON,
+            text_color = config.TEXT,
             font = ("Consolas", 16),
             command = lambda: self.self_destruct()
         )
@@ -475,8 +468,8 @@ class Reminder_Frame(ctk.CTkFrame):
             height = 22,
             text = "EDIT",
             anchor = "center",
-            fg_color = LITTLE_BUTTON,
-            text_color = TEXT,
+            fg_color = config.LITTLE_BUTTON,
+            text_color = config.TEXT,
             font = ("Consolas", 16)
         )
 
@@ -490,7 +483,7 @@ class Reminder_Frame(ctk.CTkFrame):
             variable = self.curr_toggle,
             onvalue = "on",
             offvalue = "off",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 16),
             fg_color = "#BE6868",
             progress_color = "#8EEB71",
@@ -500,7 +493,7 @@ class Reminder_Frame(ctk.CTkFrame):
         self.toggle.grid(column = 6, row = 2, columnspan = 2, pady = 10, padx = 20)
 
     def self_destruct(self):
-        reminders.remove(self)
+        config.reminders.remove(self)
         self.destroy()
 
     def enable_disable(self):
@@ -517,7 +510,7 @@ class Reminder_Container(ctk.CTkScrollableFrame):
             width = 500,
             height = 450,
             corner_radius = 10,
-            fg_color = FRAME_BACKGROUND,
+            fg_color = config.FRAME_BACKGROUND,
             scrollbar_button_color = "#738FBA"
         )
 
@@ -529,7 +522,7 @@ class Reminder_Container(ctk.CTkScrollableFrame):
         
         self.reminder.pack(pady = (10,0))
 
-        reminders.append(self.reminder)
+        config.reminders.append(self.reminder)
 
 class App(ctk.CTk):
     def __init__(self):
@@ -542,13 +535,13 @@ class App(ctk.CTk):
 
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
-        self.configure(fg_color = BACKGROUND)
+        self.configure(fg_color = config.BACKGROUND)
 
         self.title_text = ctk.CTkLabel(
             self,
             text = "Please Remind Me",
             justify = "center",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 45)
         )
 
@@ -558,7 +551,7 @@ class App(ctk.CTk):
             self,
             text = "The one stop convenient reminder app to prevent you \n from forgetting things",
             justify = "center",
-            text_color = TEXT,
+            text_color = config.TEXT,
             font = ("Consolas", 18)
         )
         self.description.pack()
@@ -573,8 +566,8 @@ class App(ctk.CTk):
             height = 50,
             text = "CREATE NEW REMINDER",
             anchor = "center",
-            fg_color = BUTTON,
-            text_color = TEXT,
+            fg_color = config.BUTTON,
+            text_color = config.TEXT,
             font = ("Consolas", 20),
             command = self.reminder_container.create_new_reminder
         )
