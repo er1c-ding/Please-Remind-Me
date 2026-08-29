@@ -24,8 +24,8 @@ class New_Reminder_Window(ctk.CTkToplevel):
             fg_color = config.BUTTON,
             button_color = config.BUTTON,
             text_color = config.TEXT,
-            font = ("Consolas", 18),
-            dropdown_font = ("Consolas", 16),
+            font = config.BODY_FONT,
+            dropdown_font = config.SMALL_FONT,
             dropdown_fg_color = config.BUTTON,
             dropdown_text_color = config.TEXT
         )
@@ -58,7 +58,7 @@ class Reminder_Frame(ctk.CTkFrame):
             self,
             text = "Reminder Name",
             text_color = config.TEXT,
-            font = ("Consolas", 22)
+            font = config.SUBTITLE_FONT
         )
 
         self.reminder_title.grid(column = 0, row = 0, columnspan = 5, sticky = "w", padx = 20, pady = (10, 0))
@@ -67,7 +67,7 @@ class Reminder_Frame(ctk.CTkFrame):
             self,
             text = "Reminder Type",
             text_color = config.TEXT,
-            font = ("Consolas", 18)
+            font = config.BODY_FONT
         )
 
         self.reminder_type.grid(column = 5, row = 0, columnspan = 3, sticky = "e", padx = 20, pady = (10, 0))
@@ -77,7 +77,7 @@ class Reminder_Frame(ctk.CTkFrame):
                 self,
                 text = "12/34/5678",
                 text_color = config.TEXT,
-                font = ("Consolas", 11),
+                font = config.MICRO_FONT,
                 corner_radius = 10,
                 anchor = "center",
                 height = 20,
@@ -99,7 +99,7 @@ class Reminder_Frame(ctk.CTkFrame):
             anchor = "center",
             fg_color = config.LITTLE_BUTTON,
             text_color = config.TEXT,
-            font = ("Consolas", 16),
+            font = config.BODY_FONT,
             command = lambda: self.self_destruct()
         )
 
@@ -113,7 +113,7 @@ class Reminder_Frame(ctk.CTkFrame):
             anchor = "center",
             fg_color = config.LITTLE_BUTTON,
             text_color = config.TEXT,
-            font = ("Consolas", 16)
+            font = config.BODY_FONT
         )
 
         self.edit.grid(column = 0, row = 2, columnspan = 2, pady = 10)
@@ -127,7 +127,7 @@ class Reminder_Frame(ctk.CTkFrame):
             onvalue = "on",
             offvalue = "off",
             text_color = config.TEXT,
-            font = ("Consolas", 16),
+            font = config.BODY_FONT,
             fg_color = "#BE6868",
             progress_color = "#8EEB71",
             command = self.enable_disable
@@ -185,7 +185,7 @@ class App(ctk.CTk):
             text = "Please Remind Me",
             justify = "center",
             text_color = config.TEXT,
-            font = ("Consolas", 45)
+            font = config.TITLE_FONT
         )
 
         self.title_text.pack(pady = (50,20))
@@ -195,7 +195,7 @@ class App(ctk.CTk):
             text = "The one stop convenient reminder app to prevent you \n from forgetting things",
             justify = "center",
             text_color = config.TEXT,
-            font = ("Consolas", 18)
+            font = config.BODY_FONT
         )
         self.description.pack()
 
@@ -211,7 +211,7 @@ class App(ctk.CTk):
             anchor = "center",
             fg_color = config.BUTTON,
             text_color = config.TEXT,
-            font = ("Consolas", 20),
+            font = config.BUTTON_FONT,
             command = self.reminder_container.create_new_reminder
         )
 

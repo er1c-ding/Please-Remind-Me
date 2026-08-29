@@ -24,7 +24,7 @@ class Recurring_Frame(Creation_Frame):
             self,
             text = "This will repeatedly send a reminder at the interval \nspecified below.",
             text_color = config.TEXT,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             justify = "left"
         )
 
@@ -34,14 +34,14 @@ class Recurring_Frame(Creation_Frame):
             self,
             text = "Title:",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
         self.title_entry = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 450,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -57,14 +57,14 @@ class Recurring_Frame(Creation_Frame):
             self,
             text = "Specify Interval:",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.specify_label.grid(column = 0, row = 3, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
 
         self.hours = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 50,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -80,14 +80,14 @@ class Recurring_Frame(Creation_Frame):
             self,
             text = ":",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.colon.grid(column = 0, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
         self.minutes = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 50,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -103,14 +103,14 @@ class Recurring_Frame(Creation_Frame):
             self,
             text = ":",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.colon.grid(column = 1, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
         self.seconds = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 50,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -130,7 +130,7 @@ class Recurring_Frame(Creation_Frame):
             anchor = "center",
             fg_color = config.BUTTON,
             text_color = config.TEXT,
-            font = ("Consolas", 18),
+            font = config.BUTTON_FONT,
         )
 
         self.save_button.grid(column = 0, row = 5, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
@@ -152,7 +152,7 @@ class One_Time_Frame(Creation_Frame):
             self,
             text = "This will send a single reminder at the time and date \nspecified below.",
             text_color = config.TEXT,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             justify = "left"
         )
 
@@ -162,14 +162,14 @@ class One_Time_Frame(Creation_Frame):
             self,
             text = "Title:",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
         self.title_entry = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 450,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -185,14 +185,14 @@ class One_Time_Frame(Creation_Frame):
             self,
             text = "Specify Time:",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.specify_label.grid(column = 0, row = 3, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
 
         self.hours = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 50,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -208,14 +208,14 @@ class One_Time_Frame(Creation_Frame):
             self,
             text = ":",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.colon.grid(column = 0, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
         self.minutes = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 50,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -231,14 +231,14 @@ class One_Time_Frame(Creation_Frame):
             self,
             text = ":",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.colon.grid(column = 1, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
 
         self.seconds = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 50,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -254,14 +254,14 @@ class One_Time_Frame(Creation_Frame):
             self,
             text = "Specify Date:",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.specify_label.grid(column = 0, row = 5, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
 
         self.day = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 50,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -277,14 +277,14 @@ class One_Time_Frame(Creation_Frame):
             self,
             text = "/",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.slash.grid(column = 0, row = 6, sticky = "e", padx = (0, 5), pady = (10, 0))
 
         self.month = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 50,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -300,14 +300,14 @@ class One_Time_Frame(Creation_Frame):
             self,
             text = "/",
             text_color = config.TEXT,
-            font = ("Consolas", 18),            
+            font = config.BODY_FONT,            
         )
         
         self.slash.grid(column = 1, row = 6, sticky = "e", padx = (0, 5), pady = (10, 0))
 
         self.year = ctk.CTkEntry(
             self,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
             width = 75,
             fg_color = config.ENTRY_BACKGROUND,
             text_color = config.TEXT,
@@ -327,7 +327,7 @@ class One_Time_Frame(Creation_Frame):
             anchor = "center",
             fg_color = config.BUTTON,
             text_color = config.TEXT,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
         )
 
         self.save_button.grid(column = 0, row = 7, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
@@ -340,7 +340,7 @@ class Default_Frame(Creation_Frame):
             self,
             text = f"You have chosen the default: \"{type}\"",
             text_color = config.TEXT,
-            font = ("Consolas", 18)
+            font = config.BODY_FONT
         )
 
         self.information.pack(anchor = "w", padx = (20, 0))
@@ -353,7 +353,7 @@ class Default_Frame(Creation_Frame):
             anchor = "center",
             fg_color = config.BUTTON,
             text_color = config.TEXT,
-            font = ("Consolas", 18),
+            font = config.BODY_FONT,
         )
 
         self.save_button.pack(anchor = "w", padx = (20, 0), pady = (30,0))
