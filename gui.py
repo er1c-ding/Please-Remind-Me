@@ -133,7 +133,9 @@ class Reminder_Frame(ctk.CTkFrame):
                 text_color = TEXT,
                 font = ("Consolas", 11),
                 corner_radius = 10,
+                anchor = "center",
                 height = 20,
+                width = 80,
                 fg_color = BACKGROUND,
                 padx = 2
             )
