@@ -77,3 +77,18 @@ class Default_Title_Entry(Default_Entry):
             width = 450,
             placeholder_text = "Enter Title Here"
         )
+
+class Default_Checkbox(ctk.CTkCheckBox):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+        self.configure(
+            text_color = TEXT,
+            font = BODY_FONT,
+            onvalue = True,
+            offvalue = False,
+            checkbox_height = 20,
+            checkbox_width = 20,
+            border_color = TEXT,
+            border_width = 2
+        )

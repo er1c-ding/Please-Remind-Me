@@ -92,9 +92,122 @@ class Recurring_Frame(Creation_Frame):
 
         self.save_button.grid(column = 0, row = 5, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
 
+class Checkbox_Frame(ctk.CTkFrame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+        self.configure(
+            width = 580,
+            fg_color = "transparent"
+        )
+
+        self.grid_columnconfigure((0, 1, 2, 3), weight=1)
+        self.grid_rowconfigure((0, 1), weight=1)
+
+        self.days_of_week = [ctk.StringVar(value=False) for _ in range(7)]
+        self.names_of_days = [" Monday", " Tuesday", " Wednesday", " Thursday", " Friday", " Saturday", " Sunday"]
+
+        for i in range(7):
+            self.checkbox = config.Default_Checkbox(
+                self,
+                text = self.names_of_days[i],
+                variable = self.days_of_week[i]
+            )
+
+            self.checkbox.grid(column = i % 4, row = i // 4, sticky = "w", padx = (20, 0), pady = (10, 0))
+
 class Daily_Frame(Creation_Frame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+
+        self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.grid_columnconfigure(3, weight=17)
+        self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7), weight=1)
+
+        self.information = config.Default_Label(
+            self,
+            text = "This will send a single reminder on the day of the week \nand time specified below.",
+            justify = "left"
+        )
+
+        self.information.grid(column = 0, row = 0, columnspan = 4, sticky = "w", padx = (20, 0))
+
+        self.title_label = config.Default_Label(
+            self,
+            text = "Title:"            
+        )
+        
+        self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
+
+        self.title_entry = config.Default_Title_Entry(
+            self
+        )
+
+        self.title_entry.grid(column = 0, row = 2, columnspan = 4, padx = (20, 0), sticky = "w", pady = (10, 0))
+
+        self.specify_label = config.Default_Label(
+            self,
+            text = "Specify Time:"
+        )
+        
+        self.specify_label.grid(column = 0, row = 3, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
+
+        self.hours = config.Default_Entry(
+            self,
+            width = 50,
+            placeholder_text = "HH"
+        )
+
+        self.hours.grid(column = 0, row = 4, pady = (10, 0), sticky = "w", padx = (20, 0))
+
+        self.colon = config.Default_Label(
+            self,
+            text = ":"
+        )
+        
+        self.colon.grid(column = 0, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
+
+        self.minutes = config.Default_Entry(
+            self,
+            width = 50,
+            placeholder_text = "MM"
+        )
+
+        self.minutes.grid(column = 1, row = 4, pady = (10, 0), sticky = "w")
+
+        self.colon = config.Default_Label(
+            self,
+            text = ":"
+        )
+        
+        self.colon.grid(column = 1, row = 4, sticky = "e", padx = (0, 5), pady = (10, 0))
+
+        self.seconds = config.Default_Entry(
+            self,
+            width = 50,
+            placeholder_text = "SS"
+        )
+
+        self.seconds.grid(column = 2, row = 4, pady = (10, 0), sticky = "w")
+
+        self.specify_label = config.Default_Label(
+            self,
+            text = "Specify Days of the Week:"
+        )
+        
+        self.specify_label.grid(column = 0, row = 5, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
+
+        self.checkbox_frame = Checkbox_Frame(
+            self
+        )
+
+        self.checkbox_frame.grid(column = 0, row = 6, columnspan = 4, sticky = "w")
+
+        self.save_button = config.Default_Save_Button(
+            self
+        )
+
+        self.save_button.grid(column = 0, row = 7, columnspan = 4, sticky = "w", padx = (20, 0), pady = (30,0))
 
 class One_Time_Frame(Creation_Frame):
     def __init__(self, master, **kwargs):
