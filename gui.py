@@ -60,11 +60,16 @@ class New_Reminder_Window(ctk.CTkToplevel):
         self.creation_frame.pack(anchor = "w", pady = (20, 0))
 
     def save(self):
-        self.master.reminder_container.create_frame()
+        self.master.reminder_container.create_frame(
+            type = self.curr_option_val.get(),
+            title = self.creation_frame.title_var.get(),
+            time = None,
+            day = None
+        )
         self.destroy()
 
 class Reminder_Frame(ctk.CTkFrame):
-    def __init__(self, master, info, **kwargs):
+    def __init__(self, master, type, title, time, day, **kwargs):
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -81,7 +86,7 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.reminder_title = ctk.CTkLabel(
             self,
-            text = "Reminder Name",
+            text = title,
             text_color = config.TEXT,
             font = config.SUBTITLE_FONT
         )
@@ -90,7 +95,7 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.reminder_type = config.Default_Label(
             self,
-            text = "Reminder Type"
+            text = type
         )
 
         self.reminder_type.grid(column = 5, row = 0, columnspan = 3, sticky = "e", padx = 20, pady = (10, 0))
@@ -172,10 +177,13 @@ class Reminder_Container(ctk.CTkScrollableFrame):
             scrollbar_button_color = "#738FBA"
         )
 
-    def create_frame(self):
+    def create_frame(self, type, title, time, day):
         self.reminder = Reminder_Frame(
             master = self,
-            info = None
+            type = type,
+            title = title,
+            time = None,
+            day = None
         )
         
         self.reminder.pack(pady = (10,0))

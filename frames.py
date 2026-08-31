@@ -35,8 +35,11 @@ class Recurring_Frame(Creation_Frame):
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
+        self.title_var = ctk.StringVar(value = None)
+
         self.title_entry = config.Default_Title_Entry(
-            self
+            self,
+            textvariable = self.title_var
         )
 
         self.title_entry.grid(column = 0, row = 2, columnspan = 5, padx = (20, 0), sticky = "w", pady = (10, 0))
@@ -140,8 +143,11 @@ class Daily_Frame(Creation_Frame):
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
+        self.title_var = ctk.StringVar(value = None)
+
         self.title_entry = config.Default_Title_Entry(
-            self
+            self,
+            textvariable = self.title_var
         )
 
         self.title_entry.grid(column = 0, row = 2, columnspan = 4, padx = (20, 0), sticky = "w", pady = (10, 0))
@@ -235,8 +241,11 @@ class One_Time_Frame(Creation_Frame):
         
         self.title_label.grid(column = 0, row = 1, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
 
+        self.title_var = ctk.StringVar(value = None)
+
         self.title_entry = config.Default_Title_Entry(
-            self
+            self,
+            textvariable = self.title_var
         )
 
         self.title_entry.grid(column = 0, row = 2, columnspan = 5, padx = (20, 0), sticky = "w", pady = (10, 0))
@@ -341,6 +350,8 @@ class One_Time_Frame(Creation_Frame):
 class Default_Frame(Creation_Frame):
     def __init__(self, master, type, **kwargs):
         super().__init__(master, **kwargs)
+    
+        self.title_var = ctk.StringVar(value = type)
 
         self.information = config.Default_Label(
             self,
