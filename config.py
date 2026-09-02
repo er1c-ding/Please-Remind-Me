@@ -14,6 +14,7 @@ BODY_FONT = ("Consolas", 18)
 SMALL_FONT = ("Consolas", 16)
 MICRO_FONT = ("Consolas", 11)
 reminder_frames = []
+reminders = []
 
 class Default_Entry(ctk.CTkEntry):
     def __init__(self, master, **kwargs):

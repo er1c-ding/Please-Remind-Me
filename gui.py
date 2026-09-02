@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import config
 import frames
+import reminders
 
 class New_Reminder_Window(ctk.CTkToplevel):
     def __init__(self, *args, **kwargs):
@@ -194,6 +195,8 @@ class Reminder_Frame(ctk.CTkFrame):
         )
 
         self.toggle.grid(column = 0, row = 2, sticky = "e", columnspan = 6, pady = 10, padx = 20)
+
+        self.reminder = reminders.Reminder(None, None, False)
 
     def self_destruct(self):
         config.reminder_frames.remove(self)
