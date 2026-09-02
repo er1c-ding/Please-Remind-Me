@@ -111,8 +111,13 @@ class New_Reminder_Window(ctk.CTkToplevel):
         self.destroy()
 
 class Reminder_Frame(ctk.CTkFrame):
+    reminder_count = 0
+
     def __init__(self, master, type, title, widget_values, **kwargs):
         super().__init__(master, **kwargs)
+
+        self.reminder_id = Reminder_Frame.reminder_count
+        Reminder_Frame.reminder_count += 1
 
         self.configure(
             width = 480,
