@@ -196,7 +196,7 @@ class Reminder_Frame(ctk.CTkFrame):
         self.toggle.grid(column = 0, row = 2, sticky = "e", columnspan = 6, pady = 10, padx = 20)
 
     def self_destruct(self):
-        config.reminders.remove(self)
+        config.reminder_frames.remove(self)
         self.destroy()
 
     def enable_disable(self):
@@ -227,7 +227,7 @@ class Reminder_Container(ctk.CTkScrollableFrame):
         
         self.reminder.pack(pady = (10,0))
 
-        config.reminders.append(self.reminder)
+        config.reminder_frames.append(self.reminder)
 
 class App(ctk.CTk):
     def __init__(self):
