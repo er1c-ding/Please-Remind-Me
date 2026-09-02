@@ -60,16 +60,58 @@ class New_Reminder_Window(ctk.CTkToplevel):
         self.creation_frame.pack(anchor = "w", pady = (20, 0))
 
     def save(self):
-        self.master.reminder_container.create_frame(
-            type = self.curr_option_val.get(),
-            title = self.creation_frame.title_var.get(),
-            time = None,
-            day = None
-        )
+        type_value = self.curr_option_val.get()
+        title_value = None
+        widget_values_value = []
+
+        if type_value in ["Recurring", "Daily", "One Time"]:
+            title_value = self.creation_frame.title_var.get()
+        else:
+            title_value = type_value
+
+        if type_value == "One Time":
+            month_value = self.creation_frame.month.get().zfill(2)
+            day_value = self.creation_frame.day.get().zfill(2)
+            year_value = self.creation_frame.year.get().zfill(2)
+
+            widget_values_value.append(f"{month_value}/{day_value}/{year_value}")
+
+        if type_value == "Daily":
+            days_of_week_values = []
+            days_of_week_names = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+
+            for i in range(7):
+                value = self.creation_frame.checkbox_frame.days_of_week[i].get()
+                days_of_week_values.append(value)
+
+            if days_of_week_values[:5] == ['1', '1', '1', '1', '1']:
+                widget_values_value.append("WEEKDAYS")
+            else:
+                print(days_of_week_values)
+                for i in range(5):
+                    if days_of_week_values[i] == '1':
+                        widget_values_value.append(days_of_week_names[i])
+
+            if days_of_week_values[5:] == ['1', '1']:
+                widget_values_value.append("WEEKENDS")
+            else:
+                for i in range(5, 7):
+                    if days_of_week_values[i] == '1':
+                        widget_values_value.append(days_of_week_names[i])
+
+        if type_value in ["Recurring", "Daily", "One Time"]:
+            seconds_value = self.creation_frame.seconds.get().zfill(2)
+            minutes_value = self.creation_frame.minutes.get().zfill(2)
+            hours_value = self.creation_frame.hours.get().zfill(2)
+
+            widget_values_value.append(f"{hours_value}:{minutes_value}:{seconds_value}")
+
+        self.master.reminder_container.create_frame(type_value, title_value, widget_values_value)
+
         self.destroy()
 
 class Reminder_Frame(ctk.CTkFrame):
-    def __init__(self, master, type, title, time, day, **kwargs):
+    def __init__(self, master, type, title, widget_values, **kwargs):
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -81,7 +123,7 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.grid_propagate(False)
 
-        self.grid_columnconfigure((0, 1, 2, 3, 4, 5, 6, 7), weight=1)
+        self.grid_columnconfigure((0, 1, 2, 3, 4, 5), weight=1, minsize=80)
         self.grid_rowconfigure((0, 1, 2), weight=1)
 
         self.reminder_title = ctk.CTkLabel(
@@ -91,52 +133,45 @@ class Reminder_Frame(ctk.CTkFrame):
             font = config.SUBTITLE_FONT
         )
 
-        self.reminder_title.grid(column = 0, row = 0, columnspan = 5, sticky = "w", padx = 20, pady = (10, 0))
+        self.reminder_title.grid(column = 0, row = 0, columnspan = 6, sticky = "w", padx = 20, pady = (10, 0))
 
         self.reminder_type = config.Default_Label(
             self,
             text = type
         )
 
-        self.reminder_type.grid(column = 5, row = 0, columnspan = 3, sticky = "e", padx = 20, pady = (10, 0))
+        self.reminder_type.grid(column = 0, row = 0, columnspan = 6, sticky = "e", padx = 20, pady = (10, 0))
 
-        for i in range(3):
-            self.specific_date = ctk.CTkLabel(
-                self,
-                text = "12/34/5678",
-                text_color = config.TEXT,
-                font = config.MICRO_FONT,
-                corner_radius = 10,
-                anchor = "center",
-                height = 20,
-                width = 80,
-                fg_color = config.BACKGROUND,
-                padx = 2
-            )
+        if len(widget_values) < 4:
+            for i in range(len(widget_values)):
+                self.specific_date = config.Default_DateTime_Widget(
+                    self,
+                    text = widget_values[i],
+                )
 
-            if i == 0:
-                self.specific_date.grid(column = i, row = 1, sticky = "w", padx = (20, 0))
-            else:
-                self.specific_date.grid(column = i, row = 1, padx = 0)
+                if i == 0:
+                    self.specific_date.grid(column = i, row = 1, sticky = "w", padx = (20, 0))
+                else:
+                    self.specific_date.grid(column = i, row = 1, sticky = "w", padx = 0)
+        else:
+            self.specific_date = config.Default_DateTime_Widget(self, text = widget_values[0])
+            self.specific_date.grid(column = 0, row = 1, sticky = "w", padx = (20, 0))
+
+            self.specific_date = config.Default_DateTime_Widget(self, text = widget_values[len(widget_values) - 1])
+            self.specific_date.grid(column = 1, row = 1, sticky = "w")
+
+            self.specific_date = config.Default_DateTime_Widget(self, text = "+" + str(len(widget_values) - 2) + " MORE")
+            self.specific_date.grid(column = 2, row = 1, sticky = "w")
 
         self.delete = config.Default_Little_Button(
             self,
             width = 25,
             height = 22,
-            text = "X",
+            text = "DELETE",
             command = lambda: self.self_destruct()
         )
 
-        self.delete.grid(column = 0, row = 2, sticky = "w", padx = (20, 0), pady = 10)
-
-        self.edit = config.Default_Little_Button(
-            self,
-            width = 75,
-            height = 22,
-            text = "EDIT"
-        )
-
-        self.edit.grid(column = 0, row = 2, columnspan = 2, pady = 10)
+        self.delete.grid(column = 0, row = 2, columnspan = 6, sticky = "w", padx = (20, 0), pady = 10)
 
         self.curr_toggle = ctk.StringVar(value = "off")
         
@@ -153,7 +188,7 @@ class Reminder_Frame(ctk.CTkFrame):
             command = self.enable_disable
         )
 
-        self.toggle.grid(column = 6, row = 2, columnspan = 2, pady = 10, padx = 20)
+        self.toggle.grid(column = 0, row = 2, sticky = "e", columnspan = 6, pady = 10, padx = 20)
 
     def self_destruct(self):
         config.reminders.remove(self)
@@ -177,13 +212,12 @@ class Reminder_Container(ctk.CTkScrollableFrame):
             scrollbar_button_color = "#738FBA"
         )
 
-    def create_frame(self, type, title, time, day):
+    def create_frame(self, type, title, widget_values):
         self.reminder = Reminder_Frame(
             master = self,
             type = type,
             title = title,
-            time = None,
-            day = None
+            widget_values = widget_values
         )
         
         self.reminder.pack(pady = (10,0))

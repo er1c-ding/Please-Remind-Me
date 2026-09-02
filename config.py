@@ -6,7 +6,7 @@ TEXT = "#3C5271"
 BUTTON = "#88BDF2"
 LITTLE_BUTTON = "#ABD3FA"
 PLACEHOLDER_TEXT = "#4E5963"
-ENTRY_BACKGROUND = "#D9EAF7"
+ENTRY_BACKGROUND = "#DAEFFF"
 TITLE_FONT = ("Consolas", 45)
 SUBTITLE_FONT = ("Consolas", 22)
 BUTTON_FONT = ("Consolas", 20)
@@ -91,4 +91,19 @@ class Default_Checkbox(ctk.CTkCheckBox):
             checkbox_width = 20,
             border_color = TEXT,
             border_width = 2
+        )
+
+class Default_DateTime_Widget(ctk.CTkLabel):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+        self.configure(
+            text_color = TEXT,
+            font = MICRO_FONT,
+            corner_radius = 10,
+            anchor = "center",
+            height = 20,
+            width = 75,
+            fg_color = ENTRY_BACKGROUND,
+            padx = 2
         )
