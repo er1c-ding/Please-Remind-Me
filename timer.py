@@ -41,6 +41,8 @@ class Timer():
                         else:
                             self.send_notification(reminder.title, "It's time for your break!")
                         reminder.next()
+            elif type(reminder) is reminders.One_Time_Reminder and reminder.perna_disabled:
+                config.reminders.remove(reminder)
 
         self.app.after(1000, self.check)
 
