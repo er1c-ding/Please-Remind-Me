@@ -45,4 +45,4 @@ class Timer():
         self.app.after(1000, self.check)
 
     def send_notification(self, title, description):
-        notification.notify(title = title, message = description, app_name = "Please Remind Me", timeout = 5)
+        notification.notify(title = title, message = description, app_name = "Please Remind Me", timeout = 3)
