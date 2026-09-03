@@ -16,26 +16,26 @@ class Timer():
         for reminder in config.reminders:
             if reminder.enabled:
                 if type(reminder) is reminders.Recurring_Reminder:
-                    if reminder.next_time == curr_time:
+                    if reminder.next_time <= curr_time:
                         self.send_notification(reminder.title, "It's time for your reminder: " + reminder.title)
                         reminder.next()
                 elif type(reminder) is reminders.Daily_Reminder:
-                    if reminder.next_time == curr_time:
+                    if reminder.next_time <= curr_time:
                         self.send_notification(reminder.title, "It's time for your reminder: " + reminder.title)
                         reminder.next()
                 elif type(reminder) is reminders.One_Time_Reminder:
-                    if reminder.time == curr_time:
+                    if reminder.time <= curr_time:
                         self.send_notification(reminder.title, "It's time for your reminder: " + reminder.title)
                         reminder.next()
                 elif type(reminder) is reminders.Twenty_Reminder:
-                    if reminder.next_time == curr_time:
+                    if reminder.next_time <= curr_time:
                         if reminder.cycle % 2 == 1:
                             self.send_notification(reminder.title, "It's time to look away!")
                         else:
                             self.send_notification(reminder.title, "It's time to look back!")
                         reminder.next()
                 elif type(reminder) is reminders.Podomuro_Reminder:
-                    if reminder.next_time == curr_time:
+                    if reminder.next_time <= curr_time:
                         if reminder.cycle % 2 == 1:
                             self.send_notification(reminder.title, "It's time for work!")
                         else:
