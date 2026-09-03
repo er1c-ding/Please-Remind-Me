@@ -198,7 +198,10 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.reminder = reminders.Reminder(False)
 
+        config.reminders.append(self.reminder)
+
     def self_destruct(self):
+        config.reminders.remove(self.reminder)
         config.reminder_frames.remove(self)
         self.destroy()
 

@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+import config
 
 class Reminder():
     reminder_count = 0
@@ -8,31 +9,109 @@ class Reminder():
         Reminder.reminder_count += 1
         self.enabled = enabled
 
+    def enable(self):
+        self.enabled = True
+
+    def disable(self):
+        self.enabled = False
+
 class Recurring_Reminder(Reminder):
     def __init__(self, enabled, interval):
         super().__init__(enabled)
-        self.interval = interval
-        self.start_time = datetime.now().replace(microsecond=0)
+        self.start_time = None
+        self.interval_datetime = timedelta(datetime.strftime(interval, "%H:%M:%S"))
         self.next_time = None
+
+    def next(self):
+        self.start_time = self.next_time
+        self.next_time = self.start_time + self.interval_datetime
+
+    def enable(self):
+        self.enabled = True
+        self.start_time = datetime.now().replace(microsecond = 0)
+        self.next_time = self.start_time + self.interval_datetime
 
 class One_Time_Reminder(Reminder):
     def __init__(self, enabled, date, time):
         super().__init__(enabled)
-        self.time = None
+        self.time = datetime.strptime(date + " " + time, "%m-%d-%Y %H:%M:%S")
+
+    def next(self):
+        for frame in config.reminder_frames:
+            if frame.reminder == self:
+                frame.self_destruct()
+                break
 
 class Daily_Reminder(Reminder):
     def __init__(self, enabled, days, time):
         super().__init__(enabled)
-        self.time = None
+        self.days_arr = []
+
+        days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+        for day in days:
+            if day == "Weekdays":
+                self.days_arr.extend([0, 1, 2, 3, 4])
+            elif day == "Weekends":
+                self.days_arr.extend([5, 6])
+            else:
+                self.days_arr.append(days_of_week.index(day))
+
+        self.time = datetime.strptime(time, "%H:%M:%S")
+        self.next_time = None
+
+    def next(self):
+        self.next_time = self.next_time + timedelta(days = 1)
+
+        while self.next_time.weekday() not in self.days_arr:
+            self.next_time += timedelta(days = 1)
+
+    def enable(self):
+        self.enabled = True
+        self.next_time = datetime.now().replace(microsecond = 0)
+        self.next_time = self.next_time.replace(hour = self.time.hour, minute = self.time.minute, second = self.time.second)
+
+        while self.next_time.weekday() not in self.days_arr:
+            self.next_time += timedelta(days = 1)
 
 class Podomuro_Reminder(Reminder):
-    def __init__(self, enabled, cycle):
+    def __init__(self, enabled):
         super().__init__(enabled)
-        self.start_time = datetime.now().replace(microsecond=0)
+        self.start_time = None
         self.next_time = None
+        self.cycle = 1
+
+    def next(self):
+        if self.cycle % 2 == 0:
+            self.start_time = self.next_time
+            self.next_time = self.start_time + timedelta(minutes = 25)
+        else:
+            self.start_time = self.next_time
+            self.next_time = self.start_time + timedelta(minutes = 5)
+        self.cycle += 1
+
+    def enable(self):
+        self.start_time = datetime.now().replace(microsecond = 0)
+        self.next_time = self.start_time + timedelta(minutes = 25)
+        self.cycle = 1
 
 class Twenty_Reminder(Reminder):
-    def __init__(self, enabled, cycle):
+    def __init__(self, enabled):
         super().__init__(enabled)
-        self.start_time = datetime.now().replace(microsecond=0)
+        self.start_time = None
         self.next_time = None
+        self.cycle = 1
+
+    def next(self):
+        if self.cycle % 2 == 0:
+            self.start_time = self.next_time
+            self.next_time = self.start_time + timedelta(minutes = 20)
+        else:
+            self.start_time = self.next_time
+            self.next_time = self.start_time + timedelta(seconds = 20)
+        self.cycle += 1
+
+    def enable(self):
+        self.start_time = datetime.now().replace(microsecond = 0)
+        self.next_time = self.start_time + timedelta(minutes = 20)
+        self.cycle = 1
