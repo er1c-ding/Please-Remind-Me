@@ -47,12 +47,14 @@ class Daily_Reminder(Reminder):
         super().__init__(enabled)
         self.days_arr = []
 
-        days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        days_of_week = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
 
         for day in days:
-            if day == "Weekdays":
+            if day == "EVERYDAY":
+                self.days_arr.extend([0, 1, 2, 3, 4, 5, 6])
+            elif day == "WEEKDAYS":
                 self.days_arr.extend([0, 1, 2, 3, 4])
-            elif day == "Weekends":
+            elif day == "WEEKENDS":
                 self.days_arr.extend([5, 6])
             else:
                 self.days_arr.append(days_of_week.index(day))

@@ -85,20 +85,23 @@ class New_Reminder_Window(ctk.CTkToplevel):
                 value = self.creation_frame.checkbox_frame.days_of_week[i].get()
                 days_of_week_values.append(value)
 
-            if days_of_week_values[:5] == ['1', '1', '1', '1', '1']:
-                widget_values_value.append("WEEKDAYS")
+            if days_of_week_values == ['1', '1', '1', '1', '1', '1', '1']:
+                widget_values_value.append("EVERYDAY")
             else:
-                print(days_of_week_values)
-                for i in range(5):
-                    if days_of_week_values[i] == '1':
-                        widget_values_value.append(days_of_week_names[i])
+                if days_of_week_values[:5] == ['1', '1', '1', '1', '1']:
+                    widget_values_value.append("WEEKDAYS")
+                else:
+                    print(days_of_week_values)
+                    for i in range(5):
+                        if days_of_week_values[i] == '1':
+                            widget_values_value.append(days_of_week_names[i])
 
-            if days_of_week_values[5:] == ['1', '1']:
-                widget_values_value.append("WEEKENDS")
-            else:
-                for i in range(5, 7):
-                    if days_of_week_values[i] == '1':
-                        widget_values_value.append(days_of_week_names[i])
+                if days_of_week_values[5:] == ['1', '1']:
+                    widget_values_value.append("WEEKENDS")
+                else:
+                    for i in range(5, 7):
+                        if days_of_week_values[i] == '1':
+                            widget_values_value.append(days_of_week_names[i])
 
         if type_value in ["Recurring", "Daily", "One Time"]:
             seconds_value = self.creation_frame.seconds.get().zfill(2)
