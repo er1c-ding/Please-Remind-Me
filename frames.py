@@ -154,7 +154,7 @@ class Daily_Frame(Creation_Frame):
 
         self.specify_label = config.Default_Label(
             self,
-            text = "Specify Time:"
+            text = "Specify Time (24-hour clock):"
         )
         
         self.specify_label.grid(column = 0, row = 3, columnspan = 4, padx = (20, 0), sticky = "w", pady = (20, 0))
@@ -252,7 +252,7 @@ class One_Time_Frame(Creation_Frame):
 
         self.specify_label = config.Default_Label(
             self,
-            text = "Specify Time:"
+            text = "Specify Time (24-hour clock):"
         )
         
         self.specify_label.grid(column = 0, row = 3, columnspan = 5, padx = (20, 0), sticky = "w", pady = (20, 0))
