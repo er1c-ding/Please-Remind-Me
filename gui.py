@@ -301,4 +301,4 @@ class App(ctk.CTk):
         self.new_reminder_window = New_Reminder_Window(self)
         self.new_reminder_window.wm_transient(self) 
         self.new_reminder_window.lift()
-        self.new_reminder_window.focus() 
+        self.new_reminder_window.focus()
