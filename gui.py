@@ -220,10 +220,10 @@ class Reminder_Frame(ctk.CTkFrame):
     def enable_disable(self):
         if self.curr_toggle.get() == "off":
             self.toggle.configure(text = "Disabled")
-            self.reminder.enabled = False
+            self.reminder.disable()
         else:
             self.toggle.configure(text = "Enabled")
-            self.reminder.enabled = True
+            self.reminder.enable()
 
 class Reminder_Container(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
@@ -301,4 +301,4 @@ class App(ctk.CTk):
         self.new_reminder_window = New_Reminder_Window(self)
         self.new_reminder_window.wm_transient(self) 
         self.new_reminder_window.lift()
-        self.new_reminder_window.focus()
+        self.new_reminder_window.focus() 
