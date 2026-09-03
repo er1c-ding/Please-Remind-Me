@@ -35,7 +35,7 @@ class Recurring_Reminder(Reminder):
 class One_Time_Reminder(Reminder):
     def __init__(self, title, enabled, date, time):
         super().__init__(title, enabled)
-        self.time = datetime.strptime(date + " " + time, "%m-%d-%Y %H:%M:%S")
+        self.time = datetime.strptime(date + " " + time, "%d-%m-%Y %H:%M:%S")
 
     def next(self):
         for frame in config.reminder_frames:
