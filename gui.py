@@ -200,15 +200,15 @@ class Reminder_Frame(ctk.CTkFrame):
         self.toggle.grid(column = 0, row = 2, sticky = "e", columnspan = 6, pady = 10, padx = 20)
 
         if type == "Recurring":
-            self.reminder = reminders.Recurring_Reminder(False, widget_values[0])
+            self.reminder = reminders.Recurring_Reminder(title, False, widget_values[0])
         elif type == "Daily":
-            self.reminder = reminders.Daily_Reminder(False, widget_values[:-1], widget_values[-1])
+            self.reminder = reminders.Daily_Reminder(title, False, widget_values[:-1], widget_values[-1])
         elif type == "One Time":
-            self.reminder = reminders.One_Time_Reminder(True, widget_values[0], widget_values[1])
+            self.reminder = reminders.One_Time_Reminder(title, True, widget_values[0], widget_values[1])
         elif type == "Podomuro":
-            self.reminder = reminders.Podomuro_Reminder(False)
+            self.reminder = reminders.Podomuro_Reminder(title, False)
         else:
-            self.reminder = reminders.Twenty_Reminder(False)
+            self.reminder = reminders.Twenty_Reminder(title, False)
 
         config.reminders.append(self.reminder)
 

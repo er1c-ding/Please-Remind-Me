@@ -4,9 +4,10 @@ import config
 class Reminder():
     reminder_count = 0
 
-    def __init__(self, enabled):
+    def __init__(self, title, enabled):
         self.reminder_id = Reminder.reminder_count
         Reminder.reminder_count += 1
+        self.title = title
         self.enabled = enabled
 
     def enable(self):
@@ -16,8 +17,8 @@ class Reminder():
         self.enabled = False
 
 class Recurring_Reminder(Reminder):
-    def __init__(self, enabled, interval):
-        super().__init__(enabled)
+    def __init__(self, title, enabled, interval):
+        super().__init__(title, enabled)
         self.start_time = None
         self.interval_datetime = timedelta(seconds = int(interval.split(':')[2]), minutes = int(interval.split(':')[1]), hours = int(interval.split(':')[0]))
         self.next_time = None
@@ -32,8 +33,8 @@ class Recurring_Reminder(Reminder):
         self.next_time = self.start_time + self.interval_datetime
 
 class One_Time_Reminder(Reminder):
-    def __init__(self, enabled, date, time):
-        super().__init__(enabled)
+    def __init__(self, title, enabled, date, time):
+        super().__init__(title, enabled)
         self.time = datetime.strptime(date + " " + time, "%m-%d-%Y %H:%M:%S")
 
     def next(self):
@@ -43,8 +44,8 @@ class One_Time_Reminder(Reminder):
                 break
 
 class Daily_Reminder(Reminder):
-    def __init__(self, enabled, days, time):
-        super().__init__(enabled)
+    def __init__(self, title, enabled, days, time):
+        super().__init__(title, enabled)
         self.days_arr = []
 
         days_of_week = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
@@ -77,8 +78,8 @@ class Daily_Reminder(Reminder):
             self.next_time += timedelta(days = 1)
 
 class Podomuro_Reminder(Reminder):
-    def __init__(self, enabled):
-        super().__init__(enabled)
+    def __init__(self, title, enabled):
+        super().__init__(title, enabled)
         self.start_time = None
         self.next_time = None
         self.cycle = 1
@@ -98,8 +99,8 @@ class Podomuro_Reminder(Reminder):
         self.cycle = 1
 
 class Twenty_Reminder(Reminder):
-    def __init__(self, enabled):
-        super().__init__(enabled)
+    def __init__(self, title, enabled):
+        super().__init__(title, enabled)
         self.start_time = None
         self.next_time = None
         self.cycle = 1
