@@ -19,7 +19,7 @@ class Recurring_Reminder(Reminder):
     def __init__(self, enabled, interval):
         super().__init__(enabled)
         self.start_time = None
-        self.interval_datetime = timedelta(datetime.strftime(interval, "%H:%M:%S"))
+        self.interval_datetime = timedelta(seconds = int(interval.split(':')[2]), minutes = int(interval.split(':')[1]), hours = int(interval.split(':')[0]))
         self.next_time = None
 
     def next(self):
