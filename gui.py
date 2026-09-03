@@ -75,7 +75,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
             day_value = self.creation_frame.day.get().zfill(2)
             year_value = self.creation_frame.year.get().zfill(2)
 
-            widget_values_value.append(f"{month_value}/{day_value}/{year_value}")
+            widget_values_value.append(f"{day_value}/{month_value}/{year_value}")
 
         if type_value == "Daily":
             days_of_week_values = []
