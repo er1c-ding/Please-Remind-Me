@@ -8,7 +8,7 @@ class Timer():
         self.app = app
     
     def start_timer(self):
-        self.app.after(1, self.check())
+        self.app.after(1, self.check)
 
     def check(self):
         curr_time = datetime.datetime.now().replace(microsecond = 0)
@@ -41,6 +41,8 @@ class Timer():
                         else:
                             self.send_notification(reminder.title, "It's time for your break!")
                         reminder.next()
+
+        self.app.after(1000, self.check)
 
     def send_notification(self, title, description):
         notification.notify(title = title, message = description, app_name = "Please Remind Me", timeout = 5)
