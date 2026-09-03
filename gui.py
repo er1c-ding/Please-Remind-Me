@@ -182,7 +182,10 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.delete.grid(column = 0, row = 2, columnspan = 6, sticky = "w", padx = (20, 0), pady = 10)
 
-        self.curr_toggle = ctk.StringVar(value = "off")
+        if type is "One Time":
+            self.curr_toggle = ctk.StringVar(value = "on")
+        else:
+            self.curr_toggle = ctk.StringVar(value = "off")
         
         self.toggle = ctk.CTkSwitch(
             self,
