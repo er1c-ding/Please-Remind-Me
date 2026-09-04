@@ -85,7 +85,7 @@ class Daily_Reminder(Reminder):
         while self.next_time.weekday() not in self.days_arr:
             self.next_time += timedelta(days = 1)
 
-class Podomuro_Reminder(Reminder):
+class Pomodoro_Reminder(Reminder):
     def __init__(self, title, enabled):
         super().__init__(title, enabled)
         self.start_time = None

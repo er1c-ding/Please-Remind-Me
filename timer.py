@@ -34,7 +34,7 @@ class Timer():
                         else:
                             self.send_notification(reminder.title, "It's time to look back!")
                         reminder.next()
-                elif type(reminder) is reminders.Podomuro_Reminder:
+                elif type(reminder) is reminders.Pomodoro_Reminder:
                     if reminder.next_time <= curr_time:
                         if reminder.cycle % 2 == 1:
                             self.send_notification(reminder.title, "It's time for work!")

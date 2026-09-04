@@ -22,7 +22,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
 
         self.option_menu = ctk.CTkOptionMenu(
             master = self,
-            values = ["Select Option", "Recurring", "Daily", "One Time", "Podomuro", "20-20-20"],
+            values = ["Select Option", "Recurring", "Daily", "One Time", "Pomodoro", "20-20-20"],
             variable = self.curr_option_val,
             fg_color = config.BUTTON,
             button_color = config.BUTTON,
@@ -53,8 +53,8 @@ class New_Reminder_Window(ctk.CTkToplevel):
             self.creation_frame = frames.Daily_Frame(master = self)
         elif value == "One Time":
             self.creation_frame = frames.One_Time_Frame(master = self)
-        elif value == "Podomuro":
-            self.creation_frame = frames.Default_Frame(master = self, type = "Podomuro")
+        elif value == "Pomodoro":
+            self.creation_frame = frames.Default_Frame(master = self, type = "Pomodoro")
         else:
             self.creation_frame = frames.Default_Frame(master = self, type = "20-20-20")
 
@@ -208,8 +208,8 @@ class Reminder_Frame(ctk.CTkFrame):
             self.reminder = reminders.Daily_Reminder(title, False, widget_values[:-1], widget_values[-1])
         elif type == "One Time":
             self.reminder = reminders.One_Time_Reminder(title, True, widget_values[0], widget_values[1])
-        elif type == "Podomuro":
-            self.reminder = reminders.Podomuro_Reminder(title, False)
+        elif type == "Pomodoro":
+            self.reminder = reminders.Pomodoro_Reminder(title, False)
         else:
             self.reminder = reminders.Twenty_Reminder(title, False)
 
