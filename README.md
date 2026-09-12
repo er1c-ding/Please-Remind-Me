@@ -1,56 +1,56 @@
-#Please Remind Me
+# Please Remind Me
 
-Please Remind Me is a desktop reminder application built with Python and CustomTkinter. It lets users create and manage different types of reminders through a simple GUI, including recurring reminders, scheduled reminders, Pomodoro timers, and the 20-20-20 eye-rest rule.
+**Please Remind Me** is a desktop reminder application built with Python and CustomTkinter. It allows users to create and manage several types of reminders through a graphical interface.
 
-#What I Built
+## Features
 
-I designed the application around a single reminder system that supports multiple reminder behaviors rather than creating separate programs for each use case.
+- Recurring reminders with customizable intervals
+- Daily reminders for specific days and times
+- One-time reminders for specific dates and times
+- Pomodoro work/break reminders
+- 20-20-20 eye-rest reminders
+- Enable/disable controls for individual reminders
+- Desktop notifications
+- Dynamic reminder creation
+- Scrollable reminder list
 
-The application currently supports:
+## Technical Highlights
 
-Recurring reminders — repeat at a user-defined interval
-Daily reminders — schedule reminders for specific days and times
-One-time reminders — schedule a reminder for a specific date and time
-Pomodoro reminders — alternate between work and break periods
-20-20-20 reminders — alternate between 20 minutes of work and 20 seconds of looking away
-Enable/disable controls for individual reminders
-Dynamic reminder creation through the GUI
-Desktop notifications when reminders trigger
-Scrollable reminder list for managing multiple reminders
-Technical Highlights
-Object-Oriented Design
+### Object-Oriented Design
 
-Different reminder behaviors are represented using separate classes derived from a common Reminder base class.
+The application uses a common `Reminder` base class with specialized subclasses for different reminder behaviors.
 
-This allows shared functionality such as enabling/disabling reminders to remain in the base class while each reminder type implements its own scheduling behavior.
+This allows shared functionality such as enabling and disabling reminders to remain in the base class while each reminder type handles its own scheduling logic.
 
-#Event-Driven Scheduling
+### Event-Driven Scheduling
 
-The application uses Tkinter's event loop to periodically check whether an active reminder is ready to trigger.
+The application uses Tkinter's event loop to periodically check active reminders.
 
-When a reminder's scheduled time is reached, the application sends a desktop notification and calculates the next scheduled event.
+When a reminder reaches its scheduled time, the application triggers a desktop notification and calculates the next scheduled event.
 
-#Modular GUI
+### Modular Architecture
 
-The interface is separated into multiple modules:
+The project separates the GUI, reminder logic, and scheduling system into different modules:
 
-gui.py — main application windows and reminder management
-frames.py — reminder creation interfaces
-reminders.py — reminder logic and scheduling
-timer.py — scheduling loop and notifications
-config.py — shared UI configuration and application state
-main.py — application entry point
+- `main.py` — application entry point
+- `gui.py` — main application windows and reminder management
+- `frames.py` — reminder creation interfaces
+- `reminders.py` — reminder classes and scheduling logic
+- `timer.py` — scheduling loop
+- `config.py` — shared application state and configuration
 
-This separation keeps the GUI, scheduling logic, and reminder models from being tightly coupled.
+## Technologies
 
-#Technologies
-Python
-CustomTkinter
-Tkinter
-Plyer — desktop notifications
-Object-oriented programming
-Event-driven programming
-Project Structure
+- Python
+- CustomTkinter
+- Tkinter
+- Plyer
+- Object-oriented programming
+- Event-driven programming
+
+## Project Structure
+
+```text
 Please-Remind-Me/
 ├── main.py
 ├── gui.py
@@ -60,28 +60,29 @@ Please-Remind-Me/
 ├── config.py
 ├── requirements.txt
 └── LICENSE
-#Why I Built It
 
-I wanted to build a practical desktop application while learning more about object-oriented programming, GUI development, event-driven programming, and managing state across different components of an application.
+## Motivation
 
-The project also gave me an opportunity to think about how several related features could share a common architecture instead of being implemented independently.
+I built this project as a practical way to learn and apply object-oriented programming, GUI development, event-driven programming, and application state management.
 
-#Future Improvements
+The project also gave me experience designing multiple related features around a shared architecture instead of implementing each feature as a separate program.
 
-Some areas I would like to explore as the project develops:
+## Next Steps
 
-Persistent storage using SQL
-Editing existing reminders
-Improved input validation and error handling
-More reliable scheduling
-Additional reminder types
-Improved UI/UX
-Automated tests
+- Add persistent storage using SQL
+- Add editing for existing reminders
+- Improve input validation and error handling
+- Improve scheduling reliability
+- Add additional reminder types
+- Improve UI/UX
+- Add automated tests
 
-#Personal project — actively being improved.
+## Project Status
 
-The current version focuses on the core reminder functionality and application architecture. Future development will focus on persistence, reliability, and expanding the feature set.
+**Personal project — actively being improved.**
 
-#License
+The current version implements the core reminder functionality and application architecture. Future development will focus on persistence, reliability, testing, and expanding the feature set.
+
+## License
 
 MIT License
