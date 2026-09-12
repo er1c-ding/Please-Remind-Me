@@ -97,7 +97,7 @@ class Daily_Reminder(Reminder):
             self.next_time += timedelta(days = 1)
 
     def execute(self, curr_time):
-        if self.time <= curr_time:
+        if self.next_time <= curr_time:
             super().send_notification(self.title, "It's time for your reminder: " + self.title)
             self.next()
 
@@ -126,9 +126,9 @@ class Pomodoro_Reminder(Reminder):
     def execute(self, curr_time):
         if self.next_time <= curr_time:
             if self.cycle % 2 == 1:
-                super().send_notification(self.title, "It's time to look away!")
+                super().send_notification(self.title, "It's time for work!")
             else:
-                super().send_notification(self.title, "It's time to look back!")
+                super().send_notification(self.title, "It's time for your break!")
             self.next()
 
 class Twenty_Reminder(Reminder):
@@ -156,7 +156,7 @@ class Twenty_Reminder(Reminder):
     def execute(self, curr_time):
         if self.next_time <= curr_time:
             if self.cycle % 2 == 1:
-                super().send_notification(self.title, "It's time for work!")
+                super().send_notification(self.title, "It's time to look away!")
             else:
-                super().send_notification(self.title, "It's time for your break!")
-                self.next()
+                super().send_notification(self.title, "It's time to look back!")
+            self.next()
