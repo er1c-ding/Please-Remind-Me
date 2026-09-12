@@ -43,7 +43,7 @@ class Timer():
                         reminder.next()
 
         for reminder in config.reminders:
-            if type(reminder) == reminders.One_Time_Reminder and reminder.perna_disabled:
+            if type(reminder) == reminders.One_Time_Reminder and reminder.perma_disabled:
                 config.reminders.remove(reminder)
 
         self.app.after(1000, self.check)

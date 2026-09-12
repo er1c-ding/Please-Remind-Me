@@ -36,19 +36,19 @@ class One_Time_Reminder(Reminder):
     def __init__(self, title, enabled, date, time):
         super().__init__(title, enabled)
         self.time = datetime.strptime(date + " " + time, "%d/%m/%Y %H:%M:%S")
-        self.perna_disabled = False
+        self.perma_disabled = False
 
     def next(self):
         for frame in config.reminder_frames:
             if frame.reminder == self:
                 frame.destroy()
                 config.reminder_frames.remove(frame)
-                self.perna_disabled = True
+                self.perma_disabled = True
                 self.enabled = False
                 break
 
     def enable(self):
-        if not self.perna_disabled:
+        if not self.perma_disabled:
             self.enabled = True
 
 class Daily_Reminder(Reminder):
