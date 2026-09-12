@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import config
+from plyer import notification
 
 class Reminder():
     reminder_count = 0
@@ -15,6 +16,12 @@ class Reminder():
 
     def disable(self):
         self.enabled = False
+
+    def execute(self):
+        pass
+
+    def send_notification(self, title, description):
+        notification.notify(title = title, message = description, app_name = "Please Remind Me", timeout = 3)
 
 class Recurring_Reminder(Reminder):
     def __init__(self, title, enabled, interval):
@@ -32,10 +39,15 @@ class Recurring_Reminder(Reminder):
         self.start_time = datetime.now().replace(microsecond = 0)
         self.next_time = self.start_time + self.interval_datetime
 
+    def execute(self, curr_time):
+        if self.next_time <= curr_time:
+            super().send_notification(self.title, "It's time for your reminder: " + self.title)
+            self.next()
+
 class One_Time_Reminder(Reminder):
     def __init__(self, title, enabled, date, time):
         super().__init__(title, enabled)
-        self.time = datetime.strptime(date + " " + time, "%d/%m/%Y %H:%M:%S")
+        self.next_time = datetime.strptime(date + " " + time, "%d/%m/%Y %H:%M:%S")
         self.perma_disabled = False
 
     def next(self):
@@ -50,6 +62,11 @@ class One_Time_Reminder(Reminder):
     def enable(self):
         if not self.perma_disabled:
             self.enabled = True
+
+    def execute(self, curr_time):
+        if self.next_time <= curr_time:
+            super().send_notification(self.title, "It's time for your reminder: " + self.title)
+            self.next()
 
 class Daily_Reminder(Reminder):
     def __init__(self, title, enabled, days, time):
@@ -85,6 +102,11 @@ class Daily_Reminder(Reminder):
         while self.next_time.weekday() not in self.days_arr:
             self.next_time += timedelta(days = 1)
 
+    def execute(self, curr_time):
+        if self.time <= curr_time:
+            super().send_notification(reminder.title, "It's time for your reminder: " + reminder.title)
+            self.next()
+
 class Pomodoro_Reminder(Reminder):
     def __init__(self, title, enabled):
         super().__init__(title, enabled)
@@ -107,6 +129,14 @@ class Pomodoro_Reminder(Reminder):
         self.next_time = self.start_time + timedelta(minutes = 25)
         self.cycle = 1
 
+    def execute(self, curr_time):
+        if self.next_time <= curr_time:
+            if self.cycle % 2 == 1:
+                super().send_notification(self.title, "It's time to look away!")
+            else:
+                super().send_notification(self.title, "It's time to look back!")
+            self.next()
+
 class Twenty_Reminder(Reminder):
     def __init__(self, title, enabled):
         super().__init__(title, enabled)
@@ -128,3 +158,11 @@ class Twenty_Reminder(Reminder):
         self.start_time = datetime.now().replace(microsecond = 0)
         self.next_time = self.start_time + timedelta(minutes = 20)
         self.cycle = 1
+
+    def execute(self, curr_time):
+        if self.next_time <= curr_time:
+            if self.cycle % 2 == 1:
+                super().send_notification(self.title, "It's time for work!")
+            else:
+                super().send_notification(self.title, "It's time for your break!")
+                self.next()
