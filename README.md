@@ -50,6 +50,7 @@ The project separates the GUI, reminder logic, and scheduling system into differ
 
 ## Project Structure
 
+```text
 Please-Remind-Me/
 ├── main.py
 ├── gui.py
@@ -59,6 +60,7 @@ Please-Remind-Me/
 ├── config.py
 ├── requirements.txt
 └── LICENSE
+```
 
 ## Motivation
 
