@@ -19,5 +19,10 @@ class Timer():
         for reminder in config.reminders:
             if type(reminder) == reminders.One_Time_Reminder and reminder.perma_disabled:
                 config.reminders.remove(reminder)
+                for frame in config.reminder_frames:
+                    if frame.reminder == reminder:
+                        frame.destroy()
+                        config.reminder_frames.remove(frame)
+                        break
 
         self.app.after(1000, self.check)

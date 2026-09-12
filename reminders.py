@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-import config
 from plyer import notification
 
 class Reminder():
@@ -51,13 +50,8 @@ class One_Time_Reminder(Reminder):
         self.perma_disabled = False
 
     def next(self):
-        for frame in config.reminder_frames:
-            if frame.reminder == self:
-                frame.destroy()
-                config.reminder_frames.remove(frame)
-                self.perma_disabled = True
-                self.enabled = False
-                break
+        self.perma_disabled = True
+        self.enabled = False
 
     def enable(self):
         if not self.perma_disabled:
