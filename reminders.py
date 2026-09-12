@@ -104,7 +104,7 @@ class Daily_Reminder(Reminder):
 
     def execute(self, curr_time):
         if self.time <= curr_time:
-            super().send_notification(reminder.title, "It's time for your reminder: " + reminder.title)
+            super().send_notification(self.title, "It's time for your reminder: " + self.title)
             self.next()
 
 class Pomodoro_Reminder(Reminder):
