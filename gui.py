@@ -73,7 +73,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
         if type_value == "One Time":
             month_value = self.creation_frame.month.get().zfill(2)
             day_value = self.creation_frame.day.get().zfill(2)
-            year_value = self.creation_frame.year.get().zfill(2)
+            year_value = self.creation_frame.year.get().zfill(4)
 
             widget_values_value.append(f"{day_value}/{month_value}/{year_value}")
 
