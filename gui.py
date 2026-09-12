@@ -91,7 +91,6 @@ class New_Reminder_Window(ctk.CTkToplevel):
                 if days_of_week_values[:5] == ['1', '1', '1', '1', '1']:
                     widget_values_value.append("WEEKDAYS")
                 else:
-                    print(days_of_week_values)
                     for i in range(5):
                         if days_of_week_values[i] == '1':
                             widget_values_value.append(days_of_week_names[i])
