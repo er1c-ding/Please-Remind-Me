@@ -102,6 +102,7 @@ class Pomodoro_Reminder(Reminder):
         self.cycle += 1
 
     def enable(self):
+        self.enabled = True
         self.start_time = datetime.now().replace(microsecond = 0)
         self.next_time = self.start_time + timedelta(minutes = 25)
         self.cycle = 1
@@ -123,6 +124,7 @@ class Twenty_Reminder(Reminder):
         self.cycle += 1
 
     def enable(self):
+        self.enabled = True
         self.start_time = datetime.now().replace(microsecond = 0)
         self.next_time = self.start_time + timedelta(minutes = 20)
         self.cycle = 1
