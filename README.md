@@ -1,8 +1,8 @@
-Please Remind Me
+#Please Remind Me
 
 Please Remind Me is a desktop reminder application built with Python and CustomTkinter. It lets users create and manage different types of reminders through a simple GUI, including recurring reminders, scheduled reminders, Pomodoro timers, and the 20-20-20 eye-rest rule.
 
-What I Built
+#What I Built
 
 I designed the application around a single reminder system that supports multiple reminder behaviors rather than creating separate programs for each use case.
 
@@ -24,13 +24,13 @@ Different reminder behaviors are represented using separate classes derived from
 
 This allows shared functionality such as enabling/disabling reminders to remain in the base class while each reminder type implements its own scheduling behavior.
 
-Event-Driven Scheduling
+#Event-Driven Scheduling
 
 The application uses Tkinter's event loop to periodically check whether an active reminder is ready to trigger.
 
 When a reminder's scheduled time is reached, the application sends a desktop notification and calculates the next scheduled event.
 
-Modular GUI
+#Modular GUI
 
 The interface is separated into multiple modules:
 
@@ -43,7 +43,7 @@ main.py — application entry point
 
 This separation keeps the GUI, scheduling logic, and reminder models from being tightly coupled.
 
-Technologies
+#Technologies
 Python
 CustomTkinter
 Tkinter
@@ -60,29 +60,28 @@ Please-Remind-Me/
 ├── config.py
 ├── requirements.txt
 └── LICENSE
-Why I Built It
+#Why I Built It
 
 I wanted to build a practical desktop application while learning more about object-oriented programming, GUI development, event-driven programming, and managing state across different components of an application.
 
 The project also gave me an opportunity to think about how several related features could share a common architecture instead of being implemented independently.
 
-Future Improvements
+#Future Improvements
 
 Some areas I would like to explore as the project develops:
 
-Persistent storage using a database
+Persistent storage using SQL
 Editing existing reminders
 Improved input validation and error handling
-More flexible scheduling
+More reliable scheduling
 Additional reminder types
 Improved UI/UX
 Automated tests
-Project Status
 
-Personal project — actively being improved.
+#Personal project — actively being improved.
 
 The current version focuses on the core reminder functionality and application architecture. Future development will focus on persistence, reliability, and expanding the feature set.
 
-License
+#License
 
 MIT License
