@@ -1,6 +1,7 @@
 import config
 import datetime
 import reminders
+import database
 
 class Timer():
     def __init__(self, app):
@@ -18,11 +19,10 @@ class Timer():
 
         for reminder in config.reminders:
             if type(reminder) == reminders.One_Time_Reminder and reminder.perma_disabled:
-                config.reminders.remove(reminder)
                 for frame in config.reminder_frames:
                     if frame.reminder == reminder:
-                        frame.destroy()
-                        config.reminder_frames.remove(frame)
+                        database.delete_reminder("One Time", reminder.reminder_id)
+                        frame.self_destruct()
                         break
 
         self.app.after(1000, self.check)

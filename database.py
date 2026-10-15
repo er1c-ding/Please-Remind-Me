@@ -7,12 +7,25 @@ APP_NAME = "Please Remind Me"
 DATABASE_FILENAME = "reminders.db"
 DATABASE_PATH = Path(os.environ.get("LOCALAPPDATA", Path.home())) / APP_NAME / DATABASE_FILENAME
 
+REMINDER_TABLE_DICT = {
+    "Recurring": "recurring",
+    "One Time": "one_time",
+    "Daily": "daily",
+    "Pomodoro": "pomodoro",
+    "20-20-20": "twenty",
+}
+
 def get_connection():
     DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
     connection = sqlite3.connect(DATABASE_PATH)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     return connection
+
+def delete_reminder(reminder_type, reminder_id):
+    table = REMINDER_TABLE_DICT[reminder_type]
+    with get_connection() as connection:
+        connection.execute(f"DELETE FROM {table} WHERE id = ?", (reminder_id))
 
 def load_reminders_from_database(app):
     with get_connection() as connection:

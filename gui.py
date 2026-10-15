@@ -149,6 +149,7 @@ class Reminder_Frame(ctk.CTkFrame):
         super().__init__(master, **kwargs)
 
         self.reminder_id = config.reminder_count
+        self.type = type
 
         self.configure(
             width = 480,
@@ -243,6 +244,7 @@ class Reminder_Frame(ctk.CTkFrame):
         config.reminders.append(self.reminder)
 
     def self_destruct(self):
+        database.delete_reminder(self.type, self.reminder.reminder_id)
         config.reminders.remove(self.reminder)
         config.reminder_frames.remove(self)
         self.destroy()
