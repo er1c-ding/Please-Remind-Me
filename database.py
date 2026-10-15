@@ -34,7 +34,7 @@ def load_reminders_from_database(app):
         ).fetchone()["max_id"]
 
     for reminder in recurring_reminders:
-        config.reminder_count += 1
+        config.reminder_count = reminder["id"]
         app.reminder_container.create_frame(
             type = "Recurring",
             title = reminder["title"],
@@ -43,7 +43,7 @@ def load_reminders_from_database(app):
         )
 
     for reminder in one_time_reminders:
-        config.reminder_count += 1
+        config.reminder_count = reminder["id"]
         date, time = reminder["scheduled_time"].split(" ", 1)
 
         app.reminder_container.create_frame(
