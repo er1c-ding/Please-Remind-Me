@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import config
+import database
 import frames
 import reminders
 
@@ -108,6 +109,33 @@ class New_Reminder_Window(ctk.CTkToplevel):
             hours_value = self.creation_frame.hours.get().zfill(2)
 
             widget_values_value.append(f"{hours_value}:{minutes_value}:{seconds_value}")
+
+        with database.get_connection() as connection:
+            if type_value == "Recurring":
+                connection.execute(
+                    "INSERT INTO recurring (title, enabled, interval) VALUES (?, ?, ?)",
+                    (title_value, True, widget_values_value[0])
+                )
+            elif type_value == "One Time":
+                connection.execute(
+                    "INSERT INTO one_time (title, enabled, scheduled_time) VALUES (?, ?, ?)",
+                    (title_value, True, " ".join(widget_values_value))
+                )
+            elif type_value == "Daily":
+                connection.execute(
+                    "INSERT INTO daily (title, enabled, time, days) VALUES (?, ?, ?, ?)",
+                    (title_value, True, widget_values_value[-1], ",".join(widget_values_value[:-1]))
+                )
+            elif type_value == "Pomodoro":
+                connection.execute(
+                    "INSERT INTO pomodoro (title, enabled) VALUES (?, ?)",
+                    (title_value, True)
+                )
+            else:
+                connection.execute(
+                    "INSERT INTO twenty (title, enabled) VALUES (?, ?)",
+                    (title_value, True)
+                )
 
         self.master.reminder_container.create_frame(type_value, title_value, widget_values_value, True)
 

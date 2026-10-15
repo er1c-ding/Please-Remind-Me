@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from plyer import notification
+import database
 
 class Reminder():
     reminder_count = 0
