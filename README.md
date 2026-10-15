@@ -70,7 +70,6 @@ The project also gave me experience designing multiple related features around a
 
 ## Next Steps
 
-- Add persistent storage using SQL
 - Add editing for existing reminders
 - Improve input validation and error handling
 - Improve scheduling reliability
