@@ -13,6 +13,51 @@ def get_connection():
     connection.execute("PRAGMA foreign_keys = ON")
     return connection
 
+def load_reminders_from_database(app):
+    with get_connection() as connection:
+        recurring_reminders = connection.execute("SELECT title, interval FROM recurring").fetchall()
+        one_time_reminders = connection.execute("SELECT title, scheduled_time FROM one_time").fetchall()
+        daily_reminders = connection.execute("SELECT title, time, days FROM daily").fetchall()
+        pomodoro_reminders = connection.execute("SELECT title FROM pomodoro").fetchall()
+        twenty_reminders = connection.execute("SELECT title FROM twenty").fetchall()
+
+    for reminder in recurring_reminders:
+        app.reminder_container.create_frame(
+            type = "Recurring",
+            title = reminder["title"],
+            widget_values = [reminder["interval"]]
+        )
+
+    for reminder in one_time_reminders:
+        date, time = reminder["scheduled_time"].split(" ", 1)
+
+        app.reminder_container.create_frame(
+            type = "One Time",
+            title = reminder["title"],
+            widget_values = [date, time]
+        )
+
+    for reminder in daily_reminders:
+        app.reminder_container.create_frame(
+            type = "Daily",
+            title = reminder["title"],
+            widget_values = reminder["days"].split(",") +  [reminder["time"]]
+        )
+
+    for reminder in pomodoro_reminders:
+        app.reminder_container.create_frame(
+            type = "Pomodoro",
+            title = reminder["title"],
+            widget_values = []
+        )
+
+    for reminder in twenty_reminders:
+        app.reminder_container.create_frame(
+            type = "20-20-20",
+            title = reminder["title"],
+            widget_values = []
+        )
+
 def initialize_database():
     with get_connection() as connection:
         connection.execute(
@@ -21,8 +66,7 @@ def initialize_database():
                 id INTEGER PRIMARY KEY,
                 title TEXT,
                 enabled INTEGER,
-                interval TEXT,
-                created TEXT DEFAULT CURRENT_TIMESTAMP
+                interval TEXT
             )
             """
         )
@@ -55,8 +99,7 @@ def initialize_database():
             CREATE TABLE IF NOT EXISTS pomodoro (
                 id INTEGER PRIMARY KEY,
                 title TEXT,
-                enabled INTEGER,
-                created TEXT DEFAULT CURRENT_TIMESTAMP
+                enabled INTEGER
             )
             """
         )
@@ -66,9 +109,7 @@ def initialize_database():
             CREATE TABLE IF NOT EXISTS twenty (
                 id INTEGER PRIMARY KEY,
                 title TEXT,
-                enabled INTEGER,
-                created TEXT DEFAULT CURRENT_TIMESTAMP
+                enabled INTEGER
             )
             """
         )
-
