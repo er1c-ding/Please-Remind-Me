@@ -25,7 +25,7 @@ def get_connection():
 def delete_reminder(reminder_type, reminder_id):
     table = REMINDER_TABLE_DICT[reminder_type]
     with get_connection() as connection:
-        connection.execute(f"DELETE FROM {table} WHERE id = ?", (reminder_id))
+        connection.execute(f"DELETE FROM {table} WHERE id = ?", (reminder_id,))
 
 def load_reminders_from_database(app):
     with get_connection() as connection:

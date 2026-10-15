@@ -21,7 +21,6 @@ class Timer():
             if type(reminder) == reminders.One_Time_Reminder and reminder.perma_disabled:
                 for frame in config.reminder_frames:
                     if frame.reminder == reminder:
-                        database.delete_reminder("One Time", reminder.reminder_id)
                         frame.self_destruct()
                         break
 
