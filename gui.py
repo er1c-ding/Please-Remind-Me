@@ -62,6 +62,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
         self.creation_frame.pack(anchor = "w", pady = (20, 0))
 
     def save(self):
+        config.reminder_count += 1
         type_value = self.curr_option_val.get()
         title_value = None
         widget_values_value = []
@@ -113,28 +114,28 @@ class New_Reminder_Window(ctk.CTkToplevel):
         with database.get_connection() as connection:
             if type_value == "Recurring":
                 connection.execute(
-                    "INSERT INTO recurring (title, enabled, interval) VALUES (?, ?, ?)",
-                    (title_value, True, widget_values_value[0])
+                    "INSERT INTO recurring (id, title, enabled, interval) VALUES (?, ?, ?, ?)",
+                    (config.reminder_count, title_value, True, widget_values_value[0])
                 )
             elif type_value == "One Time":
                 connection.execute(
-                    "INSERT INTO one_time (title, enabled, scheduled_time) VALUES (?, ?, ?)",
-                    (title_value, True, " ".join(widget_values_value))
+                    "INSERT INTO one_time (id, title, enabled, scheduled_time) VALUES (?, ?, ?, ?)",
+                    (config.reminder_count, title_value, True, " ".join(widget_values_value))
                 )
             elif type_value == "Daily":
                 connection.execute(
-                    "INSERT INTO daily (title, enabled, time, days) VALUES (?, ?, ?, ?)",
-                    (title_value, True, widget_values_value[-1], ",".join(widget_values_value[:-1]))
+                    "INSERT INTO daily (id, title, enabled, time, days) VALUES (?, ?, ?, ?, ?)",
+                    (config.reminder_count, title_value, True, widget_values_value[-1], ",".join(widget_values_value[:-1]))
                 )
             elif type_value == "Pomodoro":
                 connection.execute(
-                    "INSERT INTO pomodoro (title, enabled) VALUES (?, ?)",
-                    (title_value, True)
+                    "INSERT INTO pomodoro (id, title, enabled) VALUES (?, ?, ?)",
+                    (config.reminder_count, title_value, True)
                 )
             else:
                 connection.execute(
-                    "INSERT INTO twenty (title, enabled) VALUES (?, ?)",
-                    (title_value, True)
+                    "INSERT INTO twenty (id, title, enabled) VALUES (?, ?, ?)",
+                    (config.reminder_count, title_value, True)
                 )
 
         self.master.reminder_container.create_frame(type_value, title_value, widget_values_value, True)
@@ -147,8 +148,7 @@ class Reminder_Frame(ctk.CTkFrame):
     def __init__(self, master, type, title, widget_values, force_enabled, **kwargs):
         super().__init__(master, **kwargs)
 
-        self.reminder_id = Reminder_Frame.reminder_count
-        Reminder_Frame.reminder_count += 1
+        self.reminder_id = config.reminder_count
 
         self.configure(
             width = 480,

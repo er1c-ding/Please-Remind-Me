@@ -1,13 +1,13 @@
 from datetime import datetime, timedelta
 from plyer import notification
 import database
+import config
 
 class Reminder():
     reminder_count = 0
 
     def __init__(self, title, enabled):
-        self.reminder_id = Reminder.reminder_count
-        Reminder.reminder_count += 1
+        self.reminder_id = config.reminder_count
         self.title = title
         self.enabled = enabled
 
@@ -42,6 +42,21 @@ class Recurring_Reminder(Reminder):
         self.start_time = datetime.now().replace(microsecond = 0)
         self.next_time = self.start_time + self.interval_datetime
 
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE recurring SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
+
+    def disable(self):
+        self.enabled = False
+
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE recurring SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
+
     def execute(self, curr_time):
         if self.next_time <= curr_time:
             super().send_notification(self.title, "It's time for your reminder: " + self.title)
@@ -58,11 +73,26 @@ class One_Time_Reminder(Reminder):
 
     def next(self):
         self.perma_disabled = True
-        self.enabled = False
+        self.disable()
 
     def enable(self):
         if not self.perma_disabled:
             self.enabled = True
+
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE one_time SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
+
+    def disable(self):
+        self.enabled = False
+
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE one_time SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
 
     def execute(self, curr_time):
         if self.next_time <= curr_time:
@@ -106,6 +136,21 @@ class Daily_Reminder(Reminder):
         while self.next_time.weekday() not in self.days_arr:
             self.next_time += timedelta(days = 1)
 
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE daily SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
+
+    def disable(self):
+        self.enabled = False
+
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE daily SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
+
     def execute(self, curr_time):
         if self.next_time <= curr_time:
             super().send_notification(self.title, "It's time for your reminder: " + self.title)
@@ -135,6 +180,21 @@ class Pomodoro_Reminder(Reminder):
         self.start_time = datetime.now().replace(microsecond = 0)
         self.next_time = self.start_time + timedelta(minutes = 25)
         self.cycle = 1
+
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE pomodoro SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
+
+    def disable(self):
+        self.enabled = False
+
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE pomodoro SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
 
     def execute(self, curr_time):
         if self.next_time <= curr_time:
@@ -168,6 +228,21 @@ class Twenty_Reminder(Reminder):
         self.start_time = datetime.now().replace(microsecond = 0)
         self.next_time = self.start_time + timedelta(minutes = 20)
         self.cycle = 1
+
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE twenty SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
+
+    def disable(self):
+        self.enabled = False
+
+        with database.get_connection() as connection:
+            connection.execute(
+                "UPDATE twenty SET enabled = ? WHERE id = ?",
+                (self.enabled, self.reminder_id)
+            )
 
     def execute(self, curr_time):
         if self.next_time <= curr_time:

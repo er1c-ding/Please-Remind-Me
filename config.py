@@ -13,6 +13,7 @@ BUTTON_FONT = ("Consolas", 20)
 BODY_FONT = ("Consolas", 18)
 SMALL_FONT = ("Consolas", 16)
 MICRO_FONT = ("Consolas", 11)
+reminder_count = 0
 reminder_frames = []
 reminders = []
 

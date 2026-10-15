@@ -1,6 +1,7 @@
 import os
 import sqlite3
 from pathlib import Path
+import config
 
 APP_NAME = "Please Remind Me"
 DATABASE_FILENAME = "reminders.db"
@@ -15,13 +16,25 @@ def get_connection():
 
 def load_reminders_from_database(app):
     with get_connection() as connection:
-        recurring_reminders = connection.execute("SELECT title, interval, enabled FROM recurring").fetchall()
-        one_time_reminders = connection.execute("SELECT title, scheduled_time, enabled FROM one_time").fetchall()
-        daily_reminders = connection.execute("SELECT title, time, days, enabled FROM daily").fetchall()
-        pomodoro_reminders = connection.execute("SELECT title, enabled FROM pomodoro").fetchall()
-        twenty_reminders = connection.execute("SELECT title, enabled FROM twenty").fetchall()
+        recurring_reminders = connection.execute("SELECT id, title, interval, enabled FROM recurring").fetchall()
+        one_time_reminders = connection.execute("SELECT id, title, scheduled_time, enabled FROM one_time").fetchall()
+        daily_reminders = connection.execute("SELECT id, title, time, days, enabled FROM daily").fetchall()
+        pomodoro_reminders = connection.execute("SELECT id, title, enabled FROM pomodoro").fetchall()
+        twenty_reminders = connection.execute("SELECT id, title, enabled FROM twenty").fetchall()
+        max_reminder_id = connection.execute(
+            """
+            SELECT MAX(id) AS max_id FROM (
+                SELECT id FROM recurring
+                UNION ALL SELECT id FROM one_time
+                UNION ALL SELECT id FROM daily
+                UNION ALL SELECT id FROM pomodoro
+                UNION ALL SELECT id FROM twenty
+            )
+            """
+        ).fetchone()["max_id"]
 
     for reminder in recurring_reminders:
+        config.reminder_count += 1
         app.reminder_container.create_frame(
             type = "Recurring",
             title = reminder["title"],
@@ -30,6 +43,7 @@ def load_reminders_from_database(app):
         )
 
     for reminder in one_time_reminders:
+        config.reminder_count += 1
         date, time = reminder["scheduled_time"].split(" ", 1)
 
         app.reminder_container.create_frame(
@@ -40,6 +54,7 @@ def load_reminders_from_database(app):
         )
 
     for reminder in daily_reminders:
+        config.reminder_count = reminder["id"]
         app.reminder_container.create_frame(
             type = "Daily",
             title = reminder["title"],
@@ -48,6 +63,7 @@ def load_reminders_from_database(app):
         )
 
     for reminder in pomodoro_reminders:
+        config.reminder_count = reminder["id"]
         app.reminder_container.create_frame(
             type = "Pomodoro",
             title = reminder["title"],
@@ -56,12 +72,15 @@ def load_reminders_from_database(app):
         )
 
     for reminder in twenty_reminders:
+        config.reminder_count = reminder["id"]
         app.reminder_container.create_frame(
             type = "20-20-20",
             title = reminder["title"],
             widget_values = [],
             force_enabled = bool(reminder["enabled"])
         )
+
+    config.reminder_count = 0 if max_reminder_id is None else max_reminder_id
 
 def initialize_database():
     with get_connection() as connection:
