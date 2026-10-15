@@ -109,14 +109,14 @@ class New_Reminder_Window(ctk.CTkToplevel):
 
             widget_values_value.append(f"{hours_value}:{minutes_value}:{seconds_value}")
 
-        self.master.reminder_container.create_frame(type_value, title_value, widget_values_value)
+        self.master.reminder_container.create_frame(type_value, title_value, widget_values_value, True)
 
         self.destroy()
 
 class Reminder_Frame(ctk.CTkFrame):
     reminder_count = 0
 
-    def __init__(self, master, type, title, widget_values, **kwargs):
+    def __init__(self, master, type, title, widget_values, force_enabled, **kwargs):
         super().__init__(master, **kwargs)
 
         self.reminder_id = Reminder_Frame.reminder_count
@@ -181,14 +181,14 @@ class Reminder_Frame(ctk.CTkFrame):
 
         self.delete.grid(column = 0, row = 2, columnspan = 6, sticky = "w", padx = (20, 0), pady = 10)
 
-        if type == "One Time":
-            self.curr_toggle = ctk.StringVar(value = "on")
-        else:
+        if not force_enabled:
             self.curr_toggle = ctk.StringVar(value = "off")
+        else:
+            self.curr_toggle = ctk.StringVar(value = "on")
         
         self.toggle = ctk.CTkSwitch(
             self,
-            text = "Disabled",
+            text = "Disabled" if self.curr_toggle.get() == "off" else "Enabled",
             variable = self.curr_toggle,
             onvalue = "on",
             offvalue = "off",
@@ -202,15 +202,15 @@ class Reminder_Frame(ctk.CTkFrame):
         self.toggle.grid(column = 0, row = 2, sticky = "e", columnspan = 6, pady = 10, padx = 20)
 
         if type == "Recurring":
-            self.reminder = reminders.Recurring_Reminder(title, False, widget_values[0])
+            self.reminder = reminders.Recurring_Reminder(title, force_enabled, widget_values[0])
         elif type == "Daily":
-            self.reminder = reminders.Daily_Reminder(title, False, widget_values[:-1], widget_values[-1])
+            self.reminder = reminders.Daily_Reminder(title, force_enabled, widget_values[:-1], widget_values[-1])
         elif type == "One Time":
-            self.reminder = reminders.One_Time_Reminder(title, True, widget_values[0], widget_values[1])
+            self.reminder = reminders.One_Time_Reminder(title, force_enabled, widget_values[0], widget_values[1])
         elif type == "Pomodoro":
-            self.reminder = reminders.Pomodoro_Reminder(title, False)
+            self.reminder = reminders.Pomodoro_Reminder(title, force_enabled)
         else:
-            self.reminder = reminders.Twenty_Reminder(title, False)
+            self.reminder = reminders.Twenty_Reminder(title, force_enabled)
 
         config.reminders.append(self.reminder)
 
@@ -239,12 +239,13 @@ class Reminder_Container(ctk.CTkScrollableFrame):
             scrollbar_button_color = "#738FBA"
         )
 
-    def create_frame(self, type, title, widget_values):
+    def create_frame(self, type, title, widget_values, force_enabled):
         self.reminder = Reminder_Frame(
             master = self,
             type = type,
             title = title,
-            widget_values = widget_values
+            widget_values = widget_values,
+            force_enabled = force_enabled
         )
         
         self.reminder.pack(pady = (10,0))

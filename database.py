@@ -15,17 +15,18 @@ def get_connection():
 
 def load_reminders_from_database(app):
     with get_connection() as connection:
-        recurring_reminders = connection.execute("SELECT title, interval FROM recurring").fetchall()
-        one_time_reminders = connection.execute("SELECT title, scheduled_time FROM one_time").fetchall()
-        daily_reminders = connection.execute("SELECT title, time, days FROM daily").fetchall()
-        pomodoro_reminders = connection.execute("SELECT title FROM pomodoro").fetchall()
-        twenty_reminders = connection.execute("SELECT title FROM twenty").fetchall()
+        recurring_reminders = connection.execute("SELECT title, interval, enabled FROM recurring").fetchall()
+        one_time_reminders = connection.execute("SELECT title, scheduled_time, enabled FROM one_time").fetchall()
+        daily_reminders = connection.execute("SELECT title, time, days, enabled FROM daily").fetchall()
+        pomodoro_reminders = connection.execute("SELECT title, enabled FROM pomodoro").fetchall()
+        twenty_reminders = connection.execute("SELECT title, enabled FROM twenty").fetchall()
 
     for reminder in recurring_reminders:
         app.reminder_container.create_frame(
             type = "Recurring",
             title = reminder["title"],
-            widget_values = [reminder["interval"]]
+            widget_values = [reminder["interval"]],
+            force_enabled = bool(reminder["enabled"])
         )
 
     for reminder in one_time_reminders:
@@ -34,28 +35,32 @@ def load_reminders_from_database(app):
         app.reminder_container.create_frame(
             type = "One Time",
             title = reminder["title"],
-            widget_values = [date, time]
+            widget_values = [date, time],
+            force_enabled = bool(reminder["enabled"])
         )
 
     for reminder in daily_reminders:
         app.reminder_container.create_frame(
             type = "Daily",
             title = reminder["title"],
-            widget_values = reminder["days"].split(",") +  [reminder["time"]]
+            widget_values = reminder["days"].split(",") +  [reminder["time"]],
+            force_enabled = bool(reminder["enabled"])
         )
 
     for reminder in pomodoro_reminders:
         app.reminder_container.create_frame(
             type = "Pomodoro",
             title = reminder["title"],
-            widget_values = []
+            widget_values = [],
+            force_enabled = bool(reminder["enabled"])
         )
 
     for reminder in twenty_reminders:
         app.reminder_container.create_frame(
             type = "20-20-20",
             title = reminder["title"],
-            widget_values = []
+            widget_values = [],
+            force_enabled = bool(reminder["enabled"])
         )
 
 def initialize_database():

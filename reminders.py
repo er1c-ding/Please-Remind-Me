@@ -29,6 +29,9 @@ class Recurring_Reminder(Reminder):
         self.interval_datetime = timedelta(seconds = int(interval.split(':')[2]), minutes = int(interval.split(':')[1]), hours = int(interval.split(':')[0]))
         self.next_time = None
 
+        if self.enabled:
+            self.enable()
+
     def next(self):
         self.start_time = self.next_time
         self.next_time = self.start_time + self.interval_datetime
@@ -48,6 +51,9 @@ class One_Time_Reminder(Reminder):
         super().__init__(title, enabled)
         self.next_time = datetime.strptime(date + " " + time, "%d/%m/%Y %H:%M:%S")
         self.perma_disabled = False
+
+        if self.enabled:
+            self.enable()
 
     def next(self):
         self.perma_disabled = True
@@ -82,6 +88,9 @@ class Daily_Reminder(Reminder):
         self.time = datetime.strptime(time, "%H:%M:%S")
         self.next_time = None
 
+        if self.enabled:
+            self.enable()
+
     def next(self):
         self.next_time = self.next_time + timedelta(days = 1)
 
@@ -107,6 +116,9 @@ class Pomodoro_Reminder(Reminder):
         self.start_time = None
         self.next_time = None
         self.cycle = 1
+
+        if self.enabled:
+            self.enable()
 
     def next(self):
         if self.cycle % 2 == 0:
@@ -137,6 +149,9 @@ class Twenty_Reminder(Reminder):
         self.start_time = None
         self.next_time = None
         self.cycle = 1
+
+        if self.enabled:
+            self.enable()
 
     def next(self):
         if self.cycle % 2 == 0:
