@@ -87,6 +87,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
                 value = self.creation_frame.checkbox_frame.days_of_week[i].get()
                 days_of_week_values.append(value)
 
+            # Group selected days into compact labels for display and storage.
             if days_of_week_values == ['1', '1', '1', '1', '1', '1', '1']:
                 widget_values_value.append("EVERYDAY")
             else:

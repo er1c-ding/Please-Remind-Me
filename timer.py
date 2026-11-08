@@ -17,6 +17,7 @@ class Timer():
             if reminder.enabled:
                 reminder.execute(curr_time)
 
+        # Remove completed one-time reminders from storage and the interface.
         for reminder in config.reminders:
             if type(reminder) == reminders.One_Time_Reminder and reminder.perma_disabled:
                 for frame in config.reminder_frames:
@@ -24,4 +25,5 @@ class Timer():
                         frame.self_destruct()
                         break
 
+        # Schedule the next check without blocking the GUI event loop.
         self.app.after(1000, self.check)

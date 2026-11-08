@@ -5,6 +5,7 @@ import config
 
 APP_NAME = "Please Remind Me"
 DATABASE_FILENAME = "reminders.db"
+# Keep saved reminders outside the source folder or packaged application.
 DATABASE_PATH = Path(os.environ.get("LOCALAPPDATA", Path.home())) / APP_NAME / DATABASE_FILENAME
 
 REMINDER_TABLE_DICT = {
@@ -46,6 +47,7 @@ def load_reminders_from_database(app):
             """
         ).fetchone()["max_id"]
 
+    # Restore each saved ID before constructing its reminder and display frame.
     for reminder in recurring_reminders:
         config.reminder_count = reminder["id"]
         app.reminder_container.create_frame(
@@ -93,6 +95,7 @@ def load_reminders_from_database(app):
             force_enabled = bool(reminder["enabled"])
         )
 
+    # New reminders must use IDs above those already stored in any table.
     config.reminder_count = 0 if max_reminder_id is None else max_reminder_id
 
 def initialize_database():

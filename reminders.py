@@ -106,6 +106,7 @@ class Daily_Reminder(Reminder):
 
         days_of_week = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
 
+        # Expand saved day labels into weekday numbers (Monday = 0).
         for day in days:
             if day == "EVERYDAY":
                 self.days_arr.extend([0, 1, 2, 3, 4, 5, 6])
