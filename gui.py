@@ -5,7 +5,10 @@ import frames
 import reminders
 
 class New_Reminder_Window(ctk.CTkToplevel):
+    """Collect settings for a new reminder."""
+
     def __init__(self, *args, **kwargs):
+        """Build the reminder type selector and initial form."""
         super().__init__(*args, **kwargs)
         self.title("Create New Reminder")
 
@@ -44,6 +47,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
         self.creation_frame.pack(anchor = "w", pady = (20, 0))
 
     def switch_frame(self, value):
+        """Show the form for the selected reminder type."""
         self.creation_frame.destroy()
 
         if value == "Select Option":
@@ -62,6 +66,7 @@ class New_Reminder_Window(ctk.CTkToplevel):
         self.creation_frame.pack(anchor = "w", pady = (20, 0))
 
     def save(self):
+        """Save the new reminder, display it, and close the form."""
         config.reminder_count += 1
         type_value = self.curr_option_val.get()
         title_value = None
@@ -144,9 +149,12 @@ class New_Reminder_Window(ctk.CTkToplevel):
         self.destroy()
 
 class Reminder_Frame(ctk.CTkFrame):
+    """Display a reminder with deletion and enable controls."""
+
     reminder_count = 0
 
     def __init__(self, master, type, title, widget_values, force_enabled, **kwargs):
+        """Build the reminder card and its matching reminder object."""
         super().__init__(master, **kwargs)
 
         self.reminder_id = config.reminder_count
@@ -245,12 +253,14 @@ class Reminder_Frame(ctk.CTkFrame):
         config.reminders.append(self.reminder)
 
     def self_destruct(self):
+        """Remove the reminder from storage, shared state, and the interface."""
         database.delete_reminder(self.type, self.reminder.reminder_id)
         config.reminders.remove(self.reminder)
         config.reminder_frames.remove(self)
         self.destroy()
 
     def enable_disable(self):
+        """Apply the switch state to the reminder and its saved settings."""
         if self.curr_toggle.get() == "off":
             self.toggle.configure(text = "Disabled")
             self.reminder.disable()
@@ -259,7 +269,10 @@ class Reminder_Frame(ctk.CTkFrame):
             self.reminder.enable()
 
 class Reminder_Container(ctk.CTkScrollableFrame):
+    """Hold reminder cards in a scrollable list."""
+
     def __init__(self, master, **kwargs):
+        """Configure the scrollable reminder list."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -271,6 +284,7 @@ class Reminder_Container(ctk.CTkScrollableFrame):
         )
 
     def create_frame(self, type, title, widget_values, force_enabled):
+        """Create, display, and register a reminder card."""
         self.reminder = Reminder_Frame(
             master = self,
             type = type,
@@ -284,7 +298,10 @@ class Reminder_Container(ctk.CTkScrollableFrame):
         config.reminder_frames.append(self.reminder)
 
 class App(ctk.CTk):
+    """Provide the main reminder management window."""
+
     def __init__(self):
+        """Build the main window and reminder controls."""
         super().__init__()
         self.title("Please Remind Me")
 
@@ -332,6 +349,7 @@ class App(ctk.CTk):
         self.new_reminder_window = None
 
     def create_new_reminder(self):
+        """Open and focus a new reminder creation window."""
         self.new_reminder_window = New_Reminder_Window(self)
         self.new_reminder_window.wm_transient(self) 
         self.new_reminder_window.lift()

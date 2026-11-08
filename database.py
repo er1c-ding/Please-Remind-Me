@@ -17,6 +17,7 @@ REMINDER_TABLE_DICT = {
 }
 
 def get_connection():
+    """Return a configured connection to the local reminder database."""
     DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
     connection = sqlite3.connect(DATABASE_PATH)
     connection.row_factory = sqlite3.Row
@@ -24,11 +25,13 @@ def get_connection():
     return connection
 
 def delete_reminder(reminder_type, reminder_id):
+    """Delete the stored reminder with the given type and ID."""
     table = REMINDER_TABLE_DICT[reminder_type]
     with get_connection() as connection:
         connection.execute(f"DELETE FROM {table} WHERE id = ?", (reminder_id,))
 
 def load_reminders_from_database(app):
+    """Restore saved reminders and their enabled states in the app."""
     with get_connection() as connection:
         recurring_reminders = connection.execute("SELECT id, title, interval, enabled FROM recurring").fetchall()
         one_time_reminders = connection.execute("SELECT id, title, scheduled_time, enabled FROM one_time").fetchall()
@@ -99,6 +102,7 @@ def load_reminders_from_database(app):
     config.reminder_count = 0 if max_reminder_id is None else max_reminder_id
 
 def initialize_database():
+    """Create any missing reminder tables."""
     with get_connection() as connection:
         connection.execute(
             """

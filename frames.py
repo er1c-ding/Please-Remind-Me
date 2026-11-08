@@ -2,7 +2,10 @@ import customtkinter as ctk
 import config
 
 class Creation_Frame(ctk.CTkFrame):
+    """Provide a styled base for reminder creation forms."""
+
     def __init__(self, master, **kwargs):
+        """Configure the base reminder form."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -12,7 +15,10 @@ class Creation_Frame(ctk.CTkFrame):
         )
 
 class Recurring_Frame(Creation_Frame):
+    """Collect a title and interval for a recurring reminder."""
+
     def __init__(self, master, **kwargs):
+        """Build the title and interval inputs."""
         super().__init__(master, **kwargs)
 
         self.grid_columnconfigure((0, 1, 2), weight=1)
@@ -97,7 +103,10 @@ class Recurring_Frame(Creation_Frame):
         self.save_button.grid(column = 0, row = 5, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
 
 class Checkbox_Frame(ctk.CTkFrame):
+    """Provide day-of-week selection for daily reminders."""
+
     def __init__(self, master, **kwargs):
+        """Build a checkbox for each day of the week."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -121,7 +130,10 @@ class Checkbox_Frame(ctk.CTkFrame):
             self.checkbox.grid(column = i % 4, row = i // 4, sticky = "w", padx = (20, 0), pady = (10, 0))
 
 class Daily_Frame(Creation_Frame):
+    """Collect a title, time, and selected days for a daily reminder."""
+
     def __init__(self, master, **kwargs):
+        """Build the title, time, and day selection inputs."""
         super().__init__(master, **kwargs)
 
         self.grid_columnconfigure((0, 1, 2), weight=1)
@@ -218,7 +230,10 @@ class Daily_Frame(Creation_Frame):
         self.save_button.grid(column = 0, row = 7, columnspan = 4, sticky = "w", padx = (20, 0), pady = (30,0))
 
 class One_Time_Frame(Creation_Frame):
+    """Collect a title, date, and time for a one-time reminder."""
+
     def __init__(self, master, **kwargs):
+        """Build the title, date, and time inputs."""
         super().__init__(master, **kwargs)
 
         self.grid_columnconfigure((0, 1, 2), weight=1)
@@ -348,7 +363,10 @@ class One_Time_Frame(Creation_Frame):
         self.save_button.grid(column = 0, row = 7, columnspan = 5, sticky = "w", padx = (20, 0), pady = (30,0))
 
 class Default_Frame(Creation_Frame):
+    """Provide a save form for a built-in reminder schedule."""
+
     def __init__(self, master, type, **kwargs):
+        """Show the selected preset and its save button."""
         super().__init__(master, **kwargs)
     
         self.title_var = ctk.StringVar(value = type)

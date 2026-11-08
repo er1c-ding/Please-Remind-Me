@@ -18,7 +18,10 @@ reminder_frames = []
 reminders = []
 
 class Default_Entry(ctk.CTkEntry):
+    """Apply shared styling to text entries."""
+
     def __init__(self, master, **kwargs):
+        """Configure entry colors, font, and alignment."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -31,7 +34,10 @@ class Default_Entry(ctk.CTkEntry):
         )
 
 class Default_Label(ctk.CTkLabel):
+    """Apply shared styling to labels."""
+
     def __init__(self, master, **kwargs):
+        """Configure the label font and text color."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -40,7 +46,10 @@ class Default_Label(ctk.CTkLabel):
         )
 
 class Default_Button(ctk.CTkButton):
+    """Apply shared styling to standard buttons."""
+
     def __init__(self, master, **kwargs):
+        """Configure the button colors, font, and alignment."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -51,7 +60,10 @@ class Default_Button(ctk.CTkButton):
         )
 
 class Default_Little_Button(ctk.CTkButton):
+    """Apply shared styling to compact action buttons."""
+
     def __init__(self, master, **kwargs):
+        """Configure the compact button colors and font."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -62,7 +74,10 @@ class Default_Little_Button(ctk.CTkButton):
         )
 
 class Default_Save_Button(Default_Button):
+    """Provide a standard SAVE button."""
+
     def __init__(self, master, **kwargs):
+        """Set the save button label and dimensions."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -72,7 +87,10 @@ class Default_Save_Button(Default_Button):
         )
 
 class Default_Title_Entry(Default_Entry):
+    """Provide a styled reminder title input."""
+
     def __init__(self, master, **kwargs):
+        """Set the title entry width and placeholder."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -81,7 +99,10 @@ class Default_Title_Entry(Default_Entry):
         )
 
 class Default_Checkbox(ctk.CTkCheckBox):
+    """Provide a styled checkbox with boolean values."""
+
     def __init__(self, master, **kwargs):
+        """Configure checkbox styling and toggle values."""
         super().__init__(master, **kwargs)
 
         self.configure(
@@ -96,7 +117,10 @@ class Default_Checkbox(ctk.CTkCheckBox):
         )
 
 class Default_DateTime_Widget(ctk.CTkLabel):
+    """Display a date, time, or day label as a badge."""
+
     def __init__(self, master, **kwargs):
+        """Configure the schedule badge appearance."""
         super().__init__(master, **kwargs)
 
         self.configure(
